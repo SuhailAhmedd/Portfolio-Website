@@ -99,7 +99,6 @@ const phrases = [
   'I\'m a first-year engineering undergrad in the Computer Science department of SRM IST.',
   'I\'m deeply passionate about software development and innovations.',
   ' I am inclined towards data science and analytics.',
-  'I\'m deeply passionate about software development and innovations.',
   'I would love to explore different domains and fields in computer science and build up my skills.',
   'I find the idea of creating value for people and impacting the world through my work gratyfing.'
 ]
