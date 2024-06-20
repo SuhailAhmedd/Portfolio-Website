@@ -96,7 +96,7 @@ class TextScramble {
 // ——————————————————————————————————————————————————
 
 const phrases = [
-  'I\'m a pre-final year engineering undergrad in the Computer Science department of SRM IST.',
+  'I\'m a final year engineering undergrad in the Computer Science department of SRM IST.',
   'I\'m deeply passionate about software development and innovations.',
   ' I am inclined towards data science and analytics.',
   'I would love to explore different domains and fields in computer science and build up my skills.',
