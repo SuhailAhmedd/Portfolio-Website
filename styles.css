@@ -377,6 +377,21 @@ header .navbar ul li a:hover {
   resize: none;
 }
 
+.contact .row form .form-status {
+  font-size: 1.6rem;
+  color: #eee;
+  margin-top: 1rem;
+  min-height: 2rem;
+}
+
+.contact .row form .form-status.success {
+  color: #4caf50;
+}
+
+.contact .row form .form-status.error {
+  color: #f44336;
+}
+
 .contact .row .content .title {
   text-transform: uppercase;
   color: #fff;

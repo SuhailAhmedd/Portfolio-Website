@@ -109,3 +109,46 @@ const next = () => {
 next()
   
   });
+
+// ——————————————————————————————————————————————————
+// Contact form
+// ——————————————————————————————————————————————————
+
+const contactForm = document.getElementById('contact-form')
+const contactEmail = 'suhailahmed030803@gmail.com'
+
+contactForm.addEventListener('submit', async (e) => {
+  e.preventDefault()
+  const status = contactForm.querySelector('.form-status')
+  const button = contactForm.querySelector('button[type="submit"]')
+  const data = new FormData(contactForm)
+
+  // No Formspree form ID yet: hand the message to the visitor's email app.
+  if (contactForm.action.includes('YOUR_FORM_ID')) {
+    const subject = `Portfolio message from ${data.get('name')}`
+    const body = `${data.get('message')}\n\nFrom: ${data.get('name')} <${data.get('email')}>`
+    window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    return
+  }
+
+  button.disabled = true
+  status.className = 'form-status'
+  status.textContent = 'Sending...'
+
+  try {
+    const response = await fetch(contactForm.action, {
+      method: 'POST',
+      body: data,
+      headers: { Accept: 'application/json' }
+    })
+    if (!response.ok) throw new Error(response.statusText)
+    contactForm.reset()
+    status.classList.add('success')
+    status.textContent = 'Thanks! Your message has been sent.'
+  } catch (err) {
+    status.classList.add('error')
+    status.textContent = `Sorry, something went wrong. Please email me at ${contactEmail}.`
+  } finally {
+    button.disabled = false
+  }
+})
