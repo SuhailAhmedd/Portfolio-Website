@@ -338,6 +338,68 @@ header .navbar ul li a:hover {
   transform: scale(1.2);
 }
 
+.projects .box-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+}
+
+.projects .box-container .box {
+  flex: 1 1 30rem;
+  max-width: 40rem;
+  background: #222;
+  border-radius: 1rem;
+  border-top: 0.4rem solid var(--green);
+  padding: 2.5rem;
+  margin: 2rem;
+  display: flex;
+  flex-flow: column;
+}
+
+.projects .box-container .box:hover {
+  transform: translateY(-0.5rem);
+}
+
+.projects .box-container .box > i {
+  font-size: 3rem;
+  color: var(--green);
+  padding-bottom: 1.5rem;
+}
+
+.projects .box-container .box h3 {
+  font-size: 2.2rem;
+  color: #fff;
+}
+
+.projects .box-container .box p {
+  font-size: 1.5rem;
+  color: #eee;
+  padding: 1rem 0;
+  text-transform: none;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.projects .box-container .box .tags span {
+  display: inline-block;
+  font-size: 1.3rem;
+  background: #333;
+  color: #fff;
+  border-radius: 5rem;
+  padding: 0.4rem 1.5rem;
+  margin: 0.5rem 0.5rem 0 0;
+}
+
+.projects .box-container .box .links {
+  padding-top: 2rem;
+}
+
+.projects .box-container .box .links a {
+  font-size: 1.6rem;
+  margin-right: 2rem;
+}
+
 .contact .row {
   display: flex;
   align-items: center;
@@ -472,6 +534,10 @@ h3 {
 
   .education .box-container .box {
     width: 100%;
+  }
+
+  .projects .box-container .box {
+    margin: 2rem 0;
   }
 
   .portfolio .box-container .box {
