@@ -1,114 +1,137 @@
-$(document).ready(function(){
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-    $('#menu').click(function(){
-      $(this).toggleClass('fa-times');
-      $('header').toggleClass('toggle');
-    });
-  
-    $(window).on('scroll load',function(){
-  
-      $('#menu').removeClass('fa-times');
-      $('header').removeClass('toggle');
-  
-    });
-  
-    // smooth scrolling 
-  
-    $('a[href*="#"]').on('click',function(e){
-  
-      e.preventDefault();
-  
-      $('html, body').animate({
-  
-        scrollTop : $($(this).attr('href')).offset().top,
-  
-      },
-        500, 
-        'linear'
-      );
-  
-    });
-    // ——————————————————————————————————————————————————
-// TextScramble
+// ——————————————————————————————————————————————————
+// Mobile sidebar toggle
 // ——————————————————————————————————————————————————
 
-class TextScramble {
-  constructor(el) {
-    this.el = el
-    this.chars = '!<>-_\\/[]{}—=+*^?#________'
-    this.update = this.update.bind(this)
-  }
-  setText(newText) {
-    const oldText = this.el.innerText
-    const length = Math.max(oldText.length, newText.length)
-    const promise = new Promise((resolve) => this.resolve = resolve)
-    this.queue = []
-    for (let i = 0; i < length; i++) {
-      const from = oldText[i] || ''
-      const to = newText[i] || ''
-      const start = Math.floor(Math.random() * 40)
-      const end = start + Math.floor(Math.random() * 40)
-      this.queue.push({ from, to, start, end })
-    }
-    cancelAnimationFrame(this.frameRequest)
-    this.frame = 0
-    this.update()
-    return promise
-  }
-  update() {
-    let output = ''
-    let complete = 0
-    for (let i = 0, n = this.queue.length; i < n; i++) {
-      let { from, to, start, end, char } = this.queue[i]
-      if (this.frame >= end) {
-        complete++
-        output += to
-      } else if (this.frame >= start) {
-        if (!char || Math.random() < 0.28) {
-          char = this.randomChar()
-          this.queue[i].char = char
-        }
-        output += `<span class="dud">${char}</span>`
-      } else {
-        output += from
+const menu = document.getElementById('menu')
+const sidebar = document.querySelector('body > header')
+
+const setMenu = (open) => {
+  sidebar.classList.toggle('toggle', open)
+  menu.classList.toggle('fa-times', open)
+  menu.classList.toggle('fa-bars', !open)
+  menu.setAttribute('aria-expanded', String(open))
+  menu.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation')
+}
+
+menu.addEventListener('click', () => setMenu(!sidebar.classList.contains('toggle')))
+window.addEventListener('scroll', () => { if (sidebar.classList.contains('toggle')) setMenu(false) }, { passive: true })
+
+// in-page links scroll smoothly (via CSS scroll-behavior) and close the menu
+document.querySelectorAll('a[href^="#"]').forEach((a) => {
+  a.addEventListener('click', () => setMenu(false))
+})
+
+// ——————————————————————————————————————————————————
+// Active section in the sidebar
+// ——————————————————————————————————————————————————
+
+const navLinks = document.querySelectorAll('.navbar a')
+const sections = [...navLinks].map((a) => document.querySelector(a.getAttribute('href')))
+
+const setActive = () => {
+  const y = window.scrollY + window.innerHeight * 0.35
+  let current = sections[0]
+  sections.forEach((s) => { if (s && s.offsetTop <= y) current = s })
+  navLinks.forEach((a) => a.classList.toggle('active', a.getAttribute('href') === `#${current.id}`))
+}
+
+window.addEventListener('scroll', setActive, { passive: true })
+setActive()
+
+// ——————————————————————————————————————————————————
+// Reveal on scroll
+// ——————————————————————————————————————————————————
+
+const revealEls = document.querySelectorAll('.reveal')
+
+if (reduceMotion || !('IntersectionObserver' in window)) {
+  revealEls.forEach((el) => el.classList.add('in'))
+} else {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in')
+        io.unobserve(entry.target)
       }
-    }
-    this.el.innerHTML = output
-    if (complete === this.queue.length) {
-      this.resolve()
-    } else {
-      this.frameRequest = requestAnimationFrame(this.update)
-      this.frame++
-    }
-  }
-  randomChar() {
-    return this.chars[Math.floor(Math.random() * this.chars.length)]
-  }
-}
-// ——————————————————————————————————————————————————
-// Example
-// ——————————————————————————————————————————————————
-
-const phrases = [
-  'I\u2019m a Data Engineer focused on building scalable data pipelines, ETL workflows, and analytics solutions.',
-  'I design reliable, well-tested data systems that turn raw data into trusted insights.',
-  'I work across cloud platforms, SQL, and Python to deliver data that teams can depend on.'
-]
-
-const el = document.querySelector('.text')
-const fx = new TextScramble(el)
-
-let counter = 0
-const next = () => {
-  fx.setText(phrases[counter]).then(() => {
-    setTimeout(next, 4000)
-  })
-  counter = (counter + 1) % phrases.length
+    })
+  }, { threshold: 0.12 })
+  revealEls.forEach((el) => io.observe(el))
 }
 
-next()
-  
-  });
+// ——————————————————————————————————————————————————
+// Hero pipeline log: print one line at a time
+// ——————————————————————————————————————————————————
+
+const runLog = document.getElementById('run-log')
+
+if (runLog && !reduceMotion) {
+  const lines = runLog.innerHTML.split('\n')
+  runLog.innerHTML = lines.map((l) => `<span class="line">${l}</span>`).join('')
+  const spans = runLog.querySelectorAll('.line')
+  const play = () => {
+    spans.forEach((s) => s.classList.remove('shown'))
+    spans.forEach((s, i) => setTimeout(() => s.classList.add('shown'), 400 + i * 550))
+  }
+  play()
+  setInterval(play, 14000)
+}
+
+// ——————————————————————————————————————————————————
+// Hero data stream: slow columns of hex/binary, kept faint
+// ——————————————————————————————————————————————————
+
+const canvas = document.querySelector('.data-rain')
+
+if (canvas && !reduceMotion) {
+  const ctx = canvas.getContext('2d')
+  const glyphs = '01ABCDEF{}[]<>=:;#$'
+  const size = 14
+  let columns = []
+  let width = 0
+  let height = 0
+
+  const resize = () => {
+    const ratio = window.devicePixelRatio || 1
+    width = canvas.offsetWidth
+    height = canvas.offsetHeight
+    canvas.width = width * ratio
+    canvas.height = height * ratio
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0)
+    // only every other column carries a stream, which keeps it sparse
+    columns = Array.from({ length: Math.ceil(width / size) }, () => ({
+      y: Math.random() * -height,
+      speed: 0.4 + Math.random() * 0.9,
+      active: Math.random() < 0.45
+    }))
+  }
+
+  let last = 0
+  const draw = (t) => {
+    requestAnimationFrame(draw)
+    if (t - last < 50 || window.scrollY > height) return
+    last = t
+    ctx.fillStyle = 'rgba(5, 9, 10, 0.16)'
+    ctx.fillRect(0, 0, width, height)
+    ctx.font = `${size - 2}px "JetBrains Mono", monospace`
+    columns.forEach((c, i) => {
+      if (!c.active) return
+      const ch = glyphs[Math.floor(Math.random() * glyphs.length)]
+      ctx.fillStyle = Math.random() < 0.04 ? 'rgba(190, 255, 215, 0.9)' : 'rgba(61, 255, 142, 0.55)'
+      ctx.fillText(ch, i * size, c.y)
+      c.y += size * c.speed
+      if (c.y > height + size) {
+        c.y = Math.random() * -200
+        c.active = Math.random() < 0.45
+      }
+    })
+  }
+
+  resize()
+  window.addEventListener('resize', resize)
+  requestAnimationFrame(draw)
+}
 
 // ——————————————————————————————————————————————————
 // Contact form
