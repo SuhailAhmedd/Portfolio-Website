@@ -10,7 +10,6 @@
   justify-content: center;
   align-items: center;
   display: flex;
-  font-family: "Roboto Mono", monospace;
   padding: 50px 0px 100px 0px;
 }
 
@@ -24,6 +23,11 @@
   .text {
     font-size: 20px !important;
   }
+}
+
+.text,
+.text * {
+  text-transform: none;
 }
 
 .dud {
@@ -389,17 +393,13 @@ header .navbar ul li a:hover {
   font-weight: normal;
 }
 
+.contact .row .content .info a {
+  text-transform: none;
+}
+
 .contact .row .content .info h3 i {
   padding-right: 1rem;
   color: var(--green);
-}
-
-.top {
-  position: fixed;
-  bottom: 7.5rem;
-  right: 2rem;
-  z-index: 100;
-  display: none;
 }
 
 a {

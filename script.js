@@ -10,12 +10,6 @@ $(document).ready(function(){
       $('#menu').removeClass('fa-times');
       $('header').removeClass('toggle');
   
-      if($(window).scrollTop() > 0){
-        $('.top').show();
-      }else{
-        $('.top').hide();
-      }
-  
     });
   
     // smooth scrolling 
@@ -96,11 +90,9 @@ class TextScramble {
 // ——————————————————————————————————————————————————
 
 const phrases = [
-  'I\'m a final year engineering undergrad in the Computer Science department of SRM IST.',
-  'I\'m deeply passionate about software development and innovations.',
-  ' I am inclined towards data engineering and analytics.',
-  'I would love to explore different domains and fields in computer science and build up my skills.',
-  'I find the idea of creating value for people and impacting the world through my work gratifying.'
+  'I\u2019m a Data Engineer focused on building scalable data pipelines, ETL workflows, and analytics solutions.',
+  'I design reliable, well-tested data systems that turn raw data into trusted insights.',
+  'I work across cloud platforms, SQL, and Python to deliver data that teams can depend on.'
 ]
 
 const el = document.querySelector('.text')
