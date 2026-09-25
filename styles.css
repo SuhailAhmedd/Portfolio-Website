@@ -25,6 +25,11 @@
   }
 }
 
+.text,
+.text * {
+  text-transform: none;
+}
+
 .dud {
   color: green;
 }
