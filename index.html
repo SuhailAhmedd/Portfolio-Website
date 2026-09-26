@@ -21,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- custom css file link  -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20260926">
 
     <!--favicon-->
     <link rel="icon" href="favicon.ico">
@@ -186,7 +186,7 @@
       </header>
 
       <!-- featured: ShopStream -->
-      <article class="featured panel reveal" aria-labelledby="ss-h">
+      <article class="featured panel" aria-labelledby="ss-h">
         <div class="panel-bar" aria-hidden="true">
           <span class="dots"><i></i><i></i><i></i></span>
           <span class="panel-title">./shopstream --run</span>
@@ -196,11 +196,14 @@
         <div class="featured-body">
           <div class="featured-head">
             <p class="kicker">End-to-end data lakehouse</p>
-            <h3 id="ss-h">ShopStream</h3>
-            <p class="featured-desc">A Databricks lakehouse that ingests historical CSV orders in batch and a live JSON event stream, runs both through a Bronze, Silver and Gold medallion architecture on Delta Lake, and serves the result on an AI/BI sales dashboard. Everything is governed in Unity Catalog and orchestrated with Lakeflow.</p>
+            <h3 id="ss-h">ShopStream <span class="ss-sub">— End-to-End Databricks Lakehouse</span></h3>
+            <p class="featured-desc">End-to-end e-commerce analytics lakehouse built with Databricks, Unity Catalog, Delta Lake, PySpark, SQL, Auto Loader, Lakeflow Spark Declarative Pipelines, and Lakeflow Jobs.</p>
             <ul class="tags" aria-label="Tech stack">
-              <li>Databricks</li><li>PySpark</li><li>SQL</li><li>Delta Lake</li><li>Auto Loader</li><li>Lakeflow</li><li>Unity Catalog</li>
+              <li>Databricks</li><li>PySpark</li><li>SQL</li><li>Delta Lake</li><li>Unity Catalog</li><li>Auto Loader</li><li>Lakeflow</li><li>Python</li>
             </ul>
+            <a class="btn btn-primary ss-top-btn" href="https://github.com/SuhailAhmedd/shopstream-lakehouse" target="_blank" rel="noopener">
+              View on GitHub <span aria-hidden="true">→</span><span class="sr-only"> (opens in a new tab)</span>
+            </a>
           </div>
 
           <ol class="medallion" aria-label="ShopStream data flow">
@@ -263,15 +266,6 @@
               </button>
               <figcaption><span class="fc-key">streaming</span> Auto Loader checkpoints make every file land exactly once.</figcaption>
             </figure>
-          </div>
-
-          <div class="featured-foot">
-            <a class="btn btn-primary" href="https://github.com/SuhailAhmedd/shopstream-lakehouse#readme" target="_blank" rel="noopener" aria-label="View the ShopStream project write-up (opens in a new tab)">
-              <span class="br" aria-hidden="true">[</span> ./view_project <span class="br" aria-hidden="true">]</span>
-            </a>
-            <a class="btn" href="https://github.com/SuhailAhmedd/shopstream-lakehouse" target="_blank" rel="noopener" aria-label="ShopStream source code on GitHub (opens in a new tab)">
-              <span class="br" aria-hidden="true">[</span> git://github <span class="br" aria-hidden="true">]</span>
-            </a>
           </div>
         </div>
       </article>
@@ -451,6 +445,6 @@
     </dialog>
 
     <!-- custom js file link  -->
-    <script src="script.js"></script>
+    <script src="script.js?v=20260926"></script>
   </body>
 </html>

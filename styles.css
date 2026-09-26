@@ -644,13 +644,13 @@ button {
 }
 
 /* reveal */
-.js .reveal {
+.reveal-on .reveal {
   opacity: 0;
   transform: translateY(14px);
   transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
 }
 
-.js .reveal.in {
+.reveal-on .reveal.in {
   opacity: 1;
   transform: none;
 }
@@ -918,6 +918,21 @@ button {
   letter-spacing: -0.01em;
   text-transform: uppercase;
   color: #f2f7f4;
+}
+
+.ss-sub {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--sans);
+  font-size: clamp(17px, 2.2vw, 22px);
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--green);
+}
+
+.ss-top-btn {
+  margin-top: 22px;
 }
 
 .featured-desc {
@@ -1686,7 +1701,7 @@ button {
     display: none;
   }
 
-  .js .reveal {
+  .reveal-on .reveal {
     opacity: 1;
     transform: none;
   }
