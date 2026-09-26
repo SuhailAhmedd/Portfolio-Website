@@ -6,7 +6,7 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 //   <span data-scramble>Suhail Ahmed</span>          decodes once when it enters the viewport
 //   data-scramble-delay="250"                         start later (ms)
 //   data-scramble-card                                also re-decodes briefly when its .card-hover is hovered
-//   <a data-scramble-hover>About</a>                  decodes briefly on hover / focus only
+//   <span data-scramble-hover>About</span>            decodes briefly when it (or its enclosing link) is hovered / focused
 //
 // The real text stays in the DOM for screen readers and layout: the visible
 // glyphs are an aria-hidden overlay on top of an invisible copy, so the box
@@ -94,8 +94,9 @@ const Scramble = (() => {
     // short decode on hover / keyboard focus
     document.querySelectorAll('[data-scramble-hover]').forEach((el) => {
       prepare(el)
-      el.addEventListener('mouseenter', () => run(el, 320))
-      el.addEventListener('focus', () => run(el, 320))
+      const target = el.closest('a, button') || el
+      target.addEventListener('mouseenter', () => run(el, 320))
+      target.addEventListener('focus', () => run(el, 320))
     })
 
     document.querySelectorAll('[data-scramble-card]').forEach((el) => {
@@ -175,119 +176,19 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
 }
 
 // ——————————————————————————————————————————————————
-// Hero status panel: rows print one after another
+// Hero lifecycle panel: stages come online one after another
 // ——————————————————————————————————————————————————
 
-const heroStatus = document.getElementById('hero-status')
+const lifecycle = document.getElementById('lifecycle')
 
-if (heroStatus && !reduceMotion) {
-  const rows = [...heroStatus.querySelectorAll('.st-row')]
-  heroStatus.classList.add('play')
-  rows.forEach((r, i) => setTimeout(() => r.classList.add('on'), 700 + i * 380))
-}
-
-// ——————————————————————————————————————————————————
-// Digital rain: very faint background texture, hero only
-// ——————————————————————————————————————————————————
-
-const canvas = document.querySelector('.rain')
-
-if (canvas && !reduceMotion) {
-  const ctx = canvas.getContext('2d')
-  const glyphs = '0123456789ABCDEF<>/_+*'
-  let size = 16
-  let columns = []
-  let width = 0
-  let height = 0
-  let visible = true
-  let last = 0
-
-  const resize = () => {
-    const ratio = Math.min(window.devicePixelRatio || 1, 2)
-    const mobile = window.innerWidth < 760
-    size = mobile ? 18 : 16
-    width = canvas.offsetWidth
-    height = canvas.offsetHeight
-    canvas.width = width * ratio
-    canvas.height = height * ratio
-    ctx.setTransform(ratio, 0, 0, ratio, 0, 0)
-    ctx.clearRect(0, 0, width, height)
-    // only some columns carry a stream; fewer still on small screens
-    const density = mobile ? 0.12 : 0.22
-    columns = Array.from({ length: Math.ceil(width / size) }, () => ({
-      y: Math.random() * -height,
-      speed: 0.3 + Math.random() * 0.5,
-      active: Math.random() < density,
-      density
-    }))
-  }
-
-  const draw = (t) => {
-    requestAnimationFrame(draw)
-    if (!visible || t - last < 80) return
-    last = t
-    // fade the previous frame towards transparent to leave short trails
-    ctx.globalCompositeOperation = 'destination-out'
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.12)'
-    ctx.fillRect(0, 0, width, height)
-    ctx.globalCompositeOperation = 'source-over'
-    ctx.font = `${size - 3}px "JetBrains Mono", monospace`
-    columns.forEach((c, i) => {
-      if (!c.active) return
-      const ch = glyphs[Math.floor(Math.random() * glyphs.length)]
-      ctx.fillStyle = Math.random() < 0.04 ? 'rgba(200, 255, 220, 0.8)' : 'rgba(0, 255, 102, 0.45)'
-      ctx.fillText(ch, i * size, c.y)
-      c.y += size * c.speed
-      if (c.y > height + size) {
-        c.y = Math.random() * -240
-        c.active = Math.random() < c.density
-      }
-    })
-  }
-
-  // stop drawing when the hero is off screen or the tab is hidden
-  new IntersectionObserver(([entry]) => { visible = entry.isIntersecting && !document.hidden })
-    .observe(canvas)
-  document.addEventListener('visibilitychange', () => {
-    visible = !document.hidden && canvas.getBoundingClientRect().bottom > 0
+if (lifecycle && !reduceMotion) {
+  const stages = [...lifecycle.querySelectorAll('.lc-stages li')]
+  lifecycle.classList.add('boot')
+  stages.forEach((li, i) => {
+    setTimeout(() => li.classList.add('on'), 600 + i * 220)
+    setTimeout(() => li.classList.add('settled'), 900 + i * 220)
   })
-
-  let resizeTimer
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer)
-    resizeTimer = setTimeout(resize, 150)
-  })
-  resize()
-  requestAnimationFrame(draw)
-}
-
-// ——————————————————————————————————————————————————
-// Screenshot lightbox
-// ——————————————————————————————————————————————————
-
-const lightbox = document.getElementById('lightbox')
-
-if (lightbox && typeof lightbox.showModal === 'function') {
-  const lbImg = document.createElement('img')
-  lightbox.append(lbImg)
-
-  document.querySelectorAll('.shot-open').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const img = btn.querySelector('img')
-      lbImg.src = btn.dataset.full
-      lbImg.alt = img.alt
-      lightbox.showModal()
-    })
-  })
-
-  lightbox.querySelector('.lb-close').addEventListener('click', () => lightbox.close())
-  // click on the backdrop closes it
-  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.close() })
-} else {
-  // no <dialog> support: open the image in a new tab instead
-  document.querySelectorAll('.shot-open').forEach((btn) => {
-    btn.addEventListener('click', () => window.open(btn.dataset.full, '_blank', 'noopener'))
-  })
+  setTimeout(() => lifecycle.classList.add('online'), 900 + stages.length * 220)
 }
 
 // ——————————————————————————————————————————————————
