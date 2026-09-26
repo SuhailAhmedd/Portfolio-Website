@@ -52,6 +52,8 @@ const revealEls = document.querySelectorAll('.reveal')
 if (reduceMotion || !('IntersectionObserver' in window)) {
   revealEls.forEach((el) => el.classList.add('in'))
 } else {
+  // content is only hidden once this observer is ready to reveal it again
+  document.documentElement.classList.add('reveal-on')
   const io = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
