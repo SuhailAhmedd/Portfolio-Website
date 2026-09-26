@@ -1,44 +1,47 @@
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 // ——————————————————————————————————————————————————
-// Mobile sidebar toggle
+// Navigation: mobile toggle, shadow on scroll, active section
 // ——————————————————————————————————————————————————
 
-const menu = document.getElementById('menu')
-const sidebar = document.querySelector('body > header')
+const topbar = document.querySelector('.topbar')
+const navToggle = document.getElementById('nav-toggle')
+const navList = document.getElementById('nav-links')
 
 const setMenu = (open) => {
-  sidebar.classList.toggle('toggle', open)
-  menu.classList.toggle('fa-times', open)
-  menu.classList.toggle('fa-bars', !open)
-  menu.setAttribute('aria-expanded', String(open))
-  menu.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation')
+  navList.classList.toggle('open', open)
+  navToggle.setAttribute('aria-expanded', String(open))
 }
 
-menu.addEventListener('click', () => setMenu(!sidebar.classList.contains('toggle')))
-window.addEventListener('scroll', () => { if (sidebar.classList.contains('toggle')) setMenu(false) }, { passive: true })
+navToggle.addEventListener('click', () => setMenu(!navList.classList.contains('open')))
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false) })
 
 // in-page links scroll smoothly (via CSS scroll-behavior) and close the menu
 document.querySelectorAll('a[href^="#"]').forEach((a) => {
   a.addEventListener('click', () => setMenu(false))
 })
 
-// ——————————————————————————————————————————————————
-// Active section in the sidebar
-// ——————————————————————————————————————————————————
+const navLinks = [...navList.querySelectorAll('a')]
+const sections = navLinks.map((a) => document.querySelector(a.getAttribute('href')))
 
-const navLinks = document.querySelectorAll('.navbar a')
-const sections = [...navLinks].map((a) => document.querySelector(a.getAttribute('href')))
+const onScroll = () => {
+  topbar.classList.toggle('scrolled', window.scrollY > 8)
 
-const setActive = () => {
   const y = window.scrollY + window.innerHeight * 0.35
   let current = sections[0]
   sections.forEach((s) => { if (s && s.offsetTop <= y) current = s })
-  navLinks.forEach((a) => a.classList.toggle('active', a.getAttribute('href') === `#${current.id}`))
+  // the last section is short, so treat the bottom of the page as reaching it
+  if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) current = sections[sections.length - 1]
+  navLinks.forEach((a) => {
+    const on = a.getAttribute('href') === `#${current.id}`
+    a.classList.toggle('active', on)
+    if (on) a.setAttribute('aria-current', 'true')
+    else a.removeAttribute('aria-current')
+  })
 }
 
-window.addEventListener('scroll', setActive, { passive: true })
-setActive()
+window.addEventListener('scroll', onScroll, { passive: true })
+onScroll()
 
 // ——————————————————————————————————————————————————
 // Reveal on scroll
@@ -56,81 +59,134 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
         io.unobserve(entry.target)
       }
     })
-  }, { threshold: 0.12 })
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' })
   revealEls.forEach((el) => io.observe(el))
 }
 
 // ——————————————————————————————————————————————————
-// Hero pipeline log: print one line at a time
+// Hero terminal: type the command, then print the output
 // ——————————————————————————————————————————————————
 
-const runLog = document.getElementById('run-log')
+const term = document.getElementById('hero-term')
 
-if (runLog && !reduceMotion) {
-  const lines = runLog.innerHTML.split('\n')
-  runLog.innerHTML = lines.map((l) => `<span class="line">${l}</span>`).join('')
-  const spans = runLog.querySelectorAll('.line')
-  const play = () => {
-    spans.forEach((s) => s.classList.remove('shown'))
-    spans.forEach((s, i) => setTimeout(() => s.classList.add('shown'), 400 + i * 550))
+if (term && !reduceMotion) {
+  const lines = [...term.querySelectorAll('.ln')]
+  const typed = term.querySelector('.typed')
+  const text = typed.dataset.text
+  typed.textContent = ''
+  term.classList.add('play')
+  lines[0].classList.add('on')
+
+  let i = 0
+  const type = () => {
+    typed.textContent = text.slice(0, ++i)
+    if (i < text.length) setTimeout(type, 45 + Math.random() * 45)
+    else lines.slice(1).forEach((l, n) => setTimeout(() => l.classList.add('on'), 350 + n * 260))
   }
-  play()
-  setInterval(play, 14000)
+  setTimeout(type, 600)
 }
 
 // ——————————————————————————————————————————————————
-// Hero data stream: slow columns of hex/binary, kept faint
+// Digital rain: sparse, faint, hero only
 // ——————————————————————————————————————————————————
 
-const canvas = document.querySelector('.data-rain')
+const canvas = document.querySelector('.rain')
 
 if (canvas && !reduceMotion) {
   const ctx = canvas.getContext('2d')
-  const glyphs = '01ABCDEF{}[]<>=:;#$'
-  const size = 14
+  const glyphs = '0123456789ABCDEF{}[]<>=+*:;'
+  let size = 16
   let columns = []
   let width = 0
   let height = 0
+  let visible = true
+  let last = 0
 
   const resize = () => {
-    const ratio = window.devicePixelRatio || 1
+    const ratio = Math.min(window.devicePixelRatio || 1, 2)
+    const mobile = window.innerWidth < 760
+    size = mobile ? 18 : 16
     width = canvas.offsetWidth
     height = canvas.offsetHeight
     canvas.width = width * ratio
     canvas.height = height * ratio
     ctx.setTransform(ratio, 0, 0, ratio, 0, 0)
-    // only every other column carries a stream, which keeps it sparse
+    ctx.clearRect(0, 0, width, height)
+    // only some columns carry a stream; fewer still on small screens
+    const density = mobile ? 0.18 : 0.32
     columns = Array.from({ length: Math.ceil(width / size) }, () => ({
       y: Math.random() * -height,
-      speed: 0.4 + Math.random() * 0.9,
-      active: Math.random() < 0.45
+      speed: 0.35 + Math.random() * 0.7,
+      active: Math.random() < density,
+      density
     }))
   }
 
-  let last = 0
   const draw = (t) => {
     requestAnimationFrame(draw)
-    if (t - last < 50 || window.scrollY > height) return
+    if (!visible || t - last < 60) return
     last = t
-    ctx.fillStyle = 'rgba(5, 9, 10, 0.16)'
+    // fade the previous frame towards transparent to leave short trails
+    ctx.globalCompositeOperation = 'destination-out'
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.12)'
     ctx.fillRect(0, 0, width, height)
-    ctx.font = `${size - 2}px "JetBrains Mono", monospace`
+    ctx.globalCompositeOperation = 'source-over'
+    ctx.font = `${size - 3}px "JetBrains Mono", monospace`
     columns.forEach((c, i) => {
       if (!c.active) return
       const ch = glyphs[Math.floor(Math.random() * glyphs.length)]
-      ctx.fillStyle = Math.random() < 0.04 ? 'rgba(190, 255, 215, 0.9)' : 'rgba(61, 255, 142, 0.55)'
+      ctx.fillStyle = Math.random() < 0.05 ? 'rgba(200, 255, 220, 0.85)' : 'rgba(0, 255, 102, 0.5)'
       ctx.fillText(ch, i * size, c.y)
       c.y += size * c.speed
       if (c.y > height + size) {
-        c.y = Math.random() * -200
-        c.active = Math.random() < 0.45
+        c.y = Math.random() * -240
+        c.active = Math.random() < c.density
       }
     })
   }
 
+  // stop drawing when the hero is off screen or the tab is hidden
+  new IntersectionObserver(([entry]) => { visible = entry.isIntersecting && !document.hidden })
+    .observe(canvas)
+  document.addEventListener('visibilitychange', () => {
+    visible = !document.hidden && canvas.getBoundingClientRect().bottom > 0
+  })
+
+  let resizeTimer
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer)
+    resizeTimer = setTimeout(resize, 150)
+  })
   resize()
-  window.addEventListener('resize', resize)
   requestAnimationFrame(draw)
+}
+
+// ——————————————————————————————————————————————————
+// Screenshot lightbox
+// ——————————————————————————————————————————————————
+
+const lightbox = document.getElementById('lightbox')
+
+if (lightbox && typeof lightbox.showModal === 'function') {
+  const lbImg = lightbox.querySelector('img')
+
+  document.querySelectorAll('.shot-open').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const img = btn.querySelector('img')
+      lbImg.src = btn.dataset.full
+      lbImg.alt = img.alt
+      lightbox.showModal()
+    })
+  })
+
+  lightbox.querySelector('.lb-close').addEventListener('click', () => lightbox.close())
+  // click on the backdrop closes it
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.close() })
+} else {
+  // no <dialog> support: open the image in a new tab instead
+  document.querySelectorAll('.shot-open').forEach((btn) => {
+    btn.addEventListener('click', () => window.open(btn.dataset.full, '_blank', 'noopener'))
+  })
 }
 
 // ——————————————————————————————————————————————————
