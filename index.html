@@ -3,18 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Suhail Ahmed | Data Engineer</title>
-    <meta name="description" content="Suhail Ahmed is a Data Engineer building reliable data pipelines, scalable ETL systems, cloud data platforms and analytics systems with Databricks, PySpark, SQL and AWS." />
+    <title>Suhail Ahmed — Data Engineer</title>
+    <meta name="description" content="Data Engineer specializing in Python, SQL, PySpark, Databricks, Delta Lake, AWS and scalable data systems." />
     <meta name="author" content="Suhail Ahmed" />
-    <meta name="theme-color" content="#030605" />
+    <meta name="theme-color" content="#040706" />
+    <meta name="color-scheme" content="dark" />
     <link rel="canonical" href="https://suhailahmedd.github.io/Portfolio-Website/" />
-    <meta property="og:title" content="Suhail Ahmed | Data Engineer" />
-    <meta property="og:description" content="Data Engineer building reliable data pipelines, scalable ETL systems, cloud data platforms and analytics systems." />
+
     <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Suhail Ahmed" />
+    <meta property="og:title" content="Suhail Ahmed — Data Engineer" />
+    <meta property="og:description" content="Data Engineer specializing in Python, SQL, PySpark, Databricks, Delta Lake, AWS and scalable data systems." />
     <meta property="og:url" content="https://suhailahmedd.github.io/Portfolio-Website/" />
     <meta property="og:image" content="https://suhailahmedd.github.io/Portfolio-Website/suhail.png" />
     <meta property="og:image:alt" content="Portrait of Suhail Ahmed" />
+    <meta property="profile:first_name" content="Suhail" />
+    <meta property="profile:last_name" content="Ahmed" />
+
     <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Suhail Ahmed — Data Engineer" />
+    <meta name="twitter:description" content="Data Engineer specializing in Python, SQL, PySpark, Databricks, Delta Lake, AWS and scalable data systems." />
+    <meta name="twitter:image" content="https://suhailahmedd.github.io/Portfolio-Website/suhail.png" />
+
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -24,457 +34,753 @@
         "worksFor": { "@type": "Organization", "name": "TMRW / House of Brands" },
         "address": { "@type": "PostalAddress", "addressLocality": "Bengaluru", "addressCountry": "IN" },
         "alumniOf": { "@type": "CollegeOrUniversity", "name": "SRM Institute of Science and Technology" },
+        "knowsAbout": ["Data Engineering", "Python", "SQL", "PySpark", "Databricks", "Delta Lake", "AWS", "ETL", "Data Quality"],
+        "image": "https://suhailahmedd.github.io/Portfolio-Website/suhail.png",
         "url": "https://suhailahmedd.github.io/Portfolio-Website/",
         "sameAs": ["https://github.com/SuhailAhmedd", "https://www.linkedin.com/in/suhail--ahmed/"]
       }
     </script>
 
-    <!--Google fonts-->
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon.ico" sizes="any">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- fonts load without blocking first paint; system fonts show until they arrive -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap"></noscript>
 
-    <!-- custom css file link (bump ?v= on every change so browsers drop cached copies) -->
-    <link rel="stylesheet" href="styles.css?v=20260926c">
+    <!-- bump ?v= on every change so browsers drop cached copies -->
+    <link rel="stylesheet" href="styles.css?v=20260926e">
 
-    <!--favicon-->
-    <link rel="icon" href="favicon.ico">
-
-    <script>document.documentElement.classList.add("js")</script>
+    <script>
+      // Runs before first paint. Decides whether the short boot sequence plays:
+      // only with JS, without reduced motion, and only on a visitor's first load.
+      (function () {
+        var d = document.documentElement
+        d.classList.add('js')
+        var seen = false
+        try { seen = localStorage.getItem('sa-boot') === '1' } catch (e) {}
+        var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        if (!seen && !calm) {
+          d.classList.add('booting')
+          // failsafe: never leave the page covered if script.js does not load
+          setTimeout(function () { d.classList.remove('booting') }, 3500)
+        }
+      })()
+    </script>
   </head>
   <body>
-    <!-- icon sprite: inline SVG instead of an icon font -->
+    <!-- icon sprite -->
     <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
       <symbol id="i-github" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
       <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></symbol>
       <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></g></symbol>
       <symbol id="i-file" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></g></symbol>
-      <symbol id="i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></symbol>
-      <symbol id="i-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M6 11l6-6 6 6"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-5-5 5 5-5 5"/></symbol>
+      <symbol id="i-ext" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M8 16 16 8m-7 0h7v7"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="m6 6 12 12M18 6 6 18"/></symbol>
+      <symbol id="i-term" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 4 4-4 4M12 17h7"/></g></symbol>
     </svg>
 
     <a class="skip-link" href="#main">Skip to content</a>
 
-    <!-- navigation -->
+    <!-- boot sequence: shown only on a first visit, skippable, removed after ~1.4s -->
+    <div class="boot" id="boot" aria-hidden="true">
+      <div class="boot-inner">
+        <pre class="boot-log" id="boot-log"></pre>
+        <div class="boot-bar"><i id="boot-fill"></i></div>
+        <button type="button" class="boot-skip" id="boot-skip" tabindex="-1">skip <kbd>esc</kbd></button>
+      </div>
+    </div>
+
+    <!-- living background: CSS grid plus a small data-plane canvas -->
+    <div class="bg" aria-hidden="true">
+      <div class="bg-grid"></div>
+      <canvas class="bg-canvas" id="bg-canvas"></canvas>
+      <div class="bg-scan"></div>
+      <div class="bg-vignette"></div>
+    </div>
+
+    <!-- custom cursor (fine pointers only, enabled by script) -->
+    <div class="cur" aria-hidden="true"><i class="cur-dot"></i><i class="cur-ring"><span class="cur-label"></span></i></div>
 
     <header class="topbar">
       <nav class="nav" aria-label="Main">
         <a class="brand" href="#home" aria-label="Suhail Ahmed, back to top">
-          <span class="brand-path">~/</span><span class="brand-user">suhail</span><span class="cursor" aria-hidden="true"></span>
+          <span class="brand-mark" aria-hidden="true">SA</span>
+          <span class="brand-text" aria-hidden="true">suhail<span class="at">@</span>data-node</span>
         </a>
 
-        <button type="button" class="nav-toggle" id="nav-toggle" aria-controls="nav-links" aria-expanded="false">
-          <span class="sr-only">Menu</span>
-          <span class="bars" aria-hidden="true"><span></span><span></span></span>
-        </button>
-
         <ul class="nav-links" id="nav-links">
-          <li><a href="#about"><span class="nx" aria-hidden="true">01</span><span data-scramble-hover>About</span></a></li>
-          <li><a href="#skills"><span class="nx" aria-hidden="true">02</span><span data-scramble-hover>Skills</span></a></li>
-          <li><a href="#experience"><span class="nx" aria-hidden="true">03</span><span data-scramble-hover>Experience</span></a></li>
-          <li><a href="#projects"><span class="nx" aria-hidden="true">04</span><span data-scramble-hover>Projects</span></a></li>
-          <li><a href="#education"><span class="nx" aria-hidden="true">05</span><span data-scramble-hover>Education</span></a></li>
-          <li><a href="#contact"><span class="nx" aria-hidden="true">06</span><span data-scramble-hover>Contact</span></a></li>
-          <li class="nav-gh"><a href="https://github.com/SuhailAhmedd" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-github"/></svg> GitHub <span class="ext" aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></li>
+          <li><a href="#home"><span class="nx" aria-hidden="true">01 /</span> Home</a></li>
+          <li><a href="#about"><span class="nx" aria-hidden="true">02 /</span> About</a></li>
+          <li><a href="#experience"><span class="nx" aria-hidden="true">03 /</span> Experience</a></li>
+          <li><a href="#projects"><span class="nx" aria-hidden="true">04 /</span> Projects</a></li>
+          <li><a href="#stack"><span class="nx" aria-hidden="true">05 /</span> Stack</a></li>
+          <li><a href="#contact"><span class="nx" aria-hidden="true">06 /</span> Contact</a></li>
+          <li class="nav-extra"><a href="#terminal"><svg class="ico" aria-hidden="true"><use href="#i-term"/></svg> Terminal</a></li>
+          <li class="nav-extra"><a href="https://drive.google.com/file/d/1ThbYjsXAlbOLefxLMoA3nbwoMET0xoo9/view?usp=sharing" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-file"/></svg> Resume<span class="sr-only"> (PDF, opens in a new tab)</span></a></li>
         </ul>
+
+        <div class="nav-right">
+          <p class="sys-status"><span class="led" aria-hidden="true"></span><span>System online</span></p>
+          <a class="nav-resume" href="https://drive.google.com/file/d/1ThbYjsXAlbOLefxLMoA3nbwoMET0xoo9/view?usp=sharing" target="_blank" rel="noopener">Resume<svg class="ico" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only"> (PDF, opens in a new tab)</span></a>
+          <button type="button" class="nav-toggle" id="nav-toggle" aria-controls="nav-links" aria-expanded="false">
+            <span class="sr-only">Menu</span>
+            <span class="bars" aria-hidden="true"><span></span><span></span></span>
+          </button>
+        </div>
       </nav>
     </header>
 
     <main id="main">
 
-    <!-- home section starts  -->
+      <!-- 01 HOME -->
+      <section class="hero" id="home" aria-labelledby="hero-name">
+        <div class="wrap hero-inner">
+          <div class="hero-copy">
+            <p class="kicker hero-in" style="--d:0"><span class="led" aria-hidden="true"></span>System online <span class="kicker-sep" aria-hidden="true">//</span> Bengaluru, India</p>
 
-    <section class="hero" id="home" aria-labelledby="hero-name">
-      <div class="hero-grid" aria-hidden="true">
-        <i></i><i></i><i></i><i></i><i></i>
-      </div>
+            <h1 class="hero-name hero-in" id="hero-name" style="--d:1">
+              <span class="glitch" data-text="Suhail Ahmed">Suhail Ahmed</span>
+            </h1>
+            <p class="hero-role hero-in" style="--d:2"><span class="prompt" aria-hidden="true">&gt;</span> Data Engineer<span class="caret" aria-hidden="true"></span></p>
 
-      <div class="hero-inner">
-        <div class="hero-copy">
-          <p class="sys-tag" aria-hidden="true"><span class="pulse"></span>SYSTEM ONLINE</p>
-          <h1 class="hero-name" id="hero-name"><span data-scramble>Suhail Ahmed</span></h1>
-          <p class="hero-role"><span class="gt" aria-hidden="true">&gt;</span> <span data-scramble data-scramble-delay="250">Data Engineer</span></p>
-          <p class="hero-pitch">Building reliable data pipelines, scalable ETL systems, cloud data platforms, and analytics systems.</p>
+            <p class="hero-pitch hero-in" style="--d:3">Engineering reliable data systems from raw data to business insight.</p>
+            <p class="hero-sub hero-in" style="--d:3">I build pipelines that turn messy, high-volume data into trusted analytical datasets. Currently a Data Engineer at <strong>TMRW / House of Brands</strong>.</p>
 
-          <div class="cta">
-            <a class="btn btn-primary" href="#projects">
-              <span class="br" aria-hidden="true">[</span> View Projects <span class="br" aria-hidden="true">]</span>
-            </a>
-            <a class="btn" href="https://github.com/SuhailAhmedd" target="_blank" rel="noopener">
-              <span class="br" aria-hidden="true">[</span> GitHub <span class="ext" aria-hidden="true">↗</span> <span class="br" aria-hidden="true">]</span><span class="sr-only"> (opens in a new tab)</span>
-            </a>
-            <a class="btn" href="#contact">
-              <span class="br" aria-hidden="true">[</span> Contact <span class="br" aria-hidden="true">]</span>
-            </a>
+            <ul class="hero-meta hero-in" style="--d:4" aria-label="Core stack">
+              <li>Python</li><li>SQL</li><li>PySpark</li><li>Databricks</li><li>AWS</li><li>Delta Lake</li>
+            </ul>
+
+            <div class="cta hero-in" style="--d:5">
+              <a class="btn btn-primary" href="#projects">View projects <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              <a class="btn" href="https://drive.google.com/uc?export=download&amp;id=1ThbYjsXAlbOLefxLMoA3nbwoMET0xoo9" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-download"/></svg> Download resume</a>
+              <a class="btn" href="https://github.com/SuhailAhmedd" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-github"/></svg> View GitHub<span class="sr-only"> (opens in a new tab)</span></a>
+              <a class="btn" href="#contact"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg> Contact</a>
+            </div>
           </div>
+
+          <!-- purely decorative interface status: not live monitoring -->
+          <aside class="telemetry hero-in" style="--d:3" aria-label="Interface status panel (decorative)">
+            <div class="panel-bar">
+              <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="panel-title">ui.telemetry</span>
+              <span class="panel-tag">portfolio ui</span>
+            </div>
+            <ul class="tele-rows">
+              <li><span>System status</span><b class="ok">Online</b></li>
+              <li><span>Data pipelines</span><b class="ok">Ready</b></li>
+              <li><span>Lakehouse</span><b class="ok">Connected</b></li>
+              <li><span>PySpark</span><b class="ok">Ready</b></li>
+              <li><span>SQL engine</span><b class="ok">Ready</b></li>
+              <li><span>GitHub</span><b class="ok">Linked</b></li>
+            </ul>
+            <div class="tele-flow" aria-hidden="true">
+              <p class="tele-label">data plane</p>
+              <ol class="mini-flow">
+                <li>raw</li><li>ingest</li><li>transform</li><li>quality</li><li>serve</li>
+              </ol>
+            </div>
+            <p class="tele-note">Decorative interface status for this site. Not a live production monitor.</p>
+          </aside>
         </div>
 
-        <!-- the data engineering lifecycle, coming online stage by stage -->
-        <figure class="panel lifecycle" id="lifecycle">
-          <div class="panel-bar" aria-hidden="true">
-            <span class="dots"><i></i><i></i><i></i></span>
-            <span class="panel-title">pipeline.status</span>
-            <span class="lc-state"><span class="pulse"></span>ready</span>
+        <a href="#about" class="scroll-hint" aria-label="Scroll to About"><span aria-hidden="true">scroll</span><i aria-hidden="true"></i></a>
+      </section>
+
+      <!-- 02 ABOUT -->
+      <section class="section section-calm" id="about" aria-labelledby="about-h">
+        <div class="wrap">
+          <header class="section-head">
+            <p class="eyebrow"><span class="sn">02</span> <span data-scramble>About / Profile</span></p>
+            <h2 id="about-h">An engineering profile, not a biography.</h2>
+          </header>
+
+          <div class="about-grid">
+            <div class="about-text reveal">
+              <p class="lead">I'm a Data Engineer focused on building reliable data pipelines, analytics systems and data workflows with Python, SQL, PySpark, Databricks and cloud technologies.</p>
+              <p>Most of my work sits between raw business data and the people who make decisions with it. The interesting problems are the messy ones:</p>
+              <ul class="problems" aria-label="Problems I work on">
+                <li>Inconsistent schemas</li>
+                <li>Large datasets</li>
+                <li>Data validation</li>
+                <li>Ingestion automation</li>
+                <li>Reconciliation</li>
+                <li>Anomaly detection</li>
+                <li>Financial analytics</li>
+                <li>Pipeline reliability</li>
+              </ul>
+
+              <dl class="kv">
+                <div><dt>role</dt><dd>Data Engineer</dd></div>
+                <div><dt>company</dt><dd>TMRW / House of Brands</dd></div>
+                <div><dt>since</dt><dd>Aug 2024</dd></div>
+                <div><dt>location</dt><dd>Bengaluru, India</dd></div>
+                <div><dt>education</dt><dd>BTech, Computer Science &amp; Engineering, SRM IST, 2025</dd></div>
+              </dl>
+            </div>
+
+            <figure class="arch-stack panel reveal">
+              <div class="panel-bar">
+                <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="panel-title">system.architecture</span>
+                <img class="avatar" src="suhail.png" alt="Portrait of Suhail Ahmed" width="28" height="28" loading="lazy" decoding="async">
+              </div>
+              <figcaption class="sr-only">How I think about a data system: raw data, ingestion, transformation, quality, analytics, business decisions.</figcaption>
+              <ol class="vflow">
+                <li><span class="vf-k">Raw data</span><span class="vf-v">files, APIs, events, exports</span></li>
+                <li><span class="vf-k">Ingestion</span><span class="vf-v">land it, keep it replayable</span></li>
+                <li><span class="vf-k">Transformation</span><span class="vf-v">PySpark and SQL into clean models</span></li>
+                <li><span class="vf-k">Quality</span><span class="vf-v">validate, dedupe, reconcile</span></li>
+                <li><span class="vf-k">Analytics</span><span class="vf-v">curated, trusted datasets</span></li>
+                <li><span class="vf-k">Business decisions</span><span class="vf-v">numbers people can act on</span></li>
+              </ol>
+            </figure>
           </div>
-          <figcaption class="sr-only">The data engineering lifecycle: source, ingest, validate, transform, store, orchestrate, analyze and monitor.</figcaption>
-          <ol class="lc-stages">
-            <li><span class="lc-n">01</span><span class="lc-name">Source</span><span class="lc-tool">APIs · files · events</span></li>
-            <li><span class="lc-n">02</span><span class="lc-name">Ingest</span><span class="lc-tool">Auto Loader · Kafka · Lambda</span></li>
-            <li><span class="lc-n">03</span><span class="lc-name">Validate</span><span class="lc-tool">schema · nulls · duplicates</span></li>
-            <li><span class="lc-n">04</span><span class="lc-name">Transform</span><span class="lc-tool">PySpark · SQL</span></li>
-            <li><span class="lc-n">05</span><span class="lc-name">Store</span><span class="lc-tool">Delta Lake · S3</span></li>
-            <li><span class="lc-n">06</span><span class="lc-name">Orchestrate</span><span class="lc-tool">Jobs · EventBridge</span></li>
-            <li><span class="lc-n">07</span><span class="lc-name">Analyze</span><span class="lc-tool">Databricks SQL · Athena</span></li>
-            <li><span class="lc-n">08</span><span class="lc-name">Monitor</span><span class="lc-tool">checks · logging</span></li>
+        </div>
+      </section>
+
+      <!-- 03 EXPERIENCE -->
+      <section class="section" id="experience" aria-labelledby="exp-h">
+        <div class="wrap">
+          <header class="section-head">
+            <p class="eyebrow"><span class="sn">03</span> <span data-scramble>Experience / Timeline</span></p>
+            <h2 id="exp-h">Production data work.</h2>
+          </header>
+
+          <ol class="timeline">
+            <li class="tl-item is-open reveal">
+              <div class="tl-when">
+                <time datetime="2024-08">Aug 2024</time> <span aria-hidden="true">→</span> <span class="now">Present</span>
+              </div>
+              <div class="tl-card">
+                <button type="button" class="tl-head" aria-expanded="true" aria-controls="tl-tmrw">
+                  <span class="tl-title">Data Engineer</span>
+                  <span class="tl-org">TMRW / House of Brands · Bengaluru, India</span>
+                  <span class="tl-chev" aria-hidden="true"></span>
+                </button>
+                <div class="tl-body" id="tl-tmrw">
+                  <div class="io" role="group" aria-label="How the work flows">
+                    <div class="io-col"><p class="io-k">Input</p><p class="io-v">Raw business data</p><p class="io-s">Finance and e-commerce datasets on AWS S3</p></div>
+                    <div class="io-col io-process"><p class="io-k">Process</p>
+                      <ol class="io-steps"><li>Validation</li><li>Transformation</li><li>Reconciliation</li><li>Analytics</li></ol>
+                    </div>
+                    <div class="io-col"><p class="io-k">Output</p><p class="io-v">Trusted business data</p><p class="io-s">Curated tables for reporting and finance analysis</p></div>
+                  </div>
+
+                  <ul class="work">
+                    <li><b>Ingestion.</b> Build and maintain production pipelines on Databricks that bring raw finance and e-commerce data from S3 into structured Delta tables.</li>
+                    <li><b>Validation and quality.</b> Checks for nulls, duplicates and schema changes, and reconciliation against source, so downstream numbers can be trusted.</li>
+                    <li><b>Finance analytics.</b> PySpark and SQL models behind CM2 margin modeling, return provisioning, inventory ageing and brand profitability.</li>
+                    <li><b>Delivery.</b> Curated, analytics-ready datasets and SQL models for reporting and business analysis.</li>
+                  </ul>
+
+                  <ul class="tags" aria-label="Focus areas">
+                    <li>Databricks</li><li>PySpark</li><li>SQL</li><li>Delta Lake</li><li>AWS S3</li><li>Data ingestion</li><li>Data validation</li><li>Data quality</li><li>Finance analytics</li><li>E-commerce datasets</li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+
+            <li class="tl-item reveal">
+              <div class="tl-when"><time datetime="2021">2021</time> <span aria-hidden="true">→</span> <time datetime="2025">2025</time></div>
+              <div class="tl-card">
+                <button type="button" class="tl-head" aria-expanded="false" aria-controls="tl-srm">
+                  <span class="tl-title">BTech, Computer Science &amp; Engineering</span>
+                  <span class="tl-org">SRM Institute of Science and Technology, Chennai</span>
+                  <span class="tl-chev" aria-hidden="true"></span>
+                </button>
+                <div class="tl-body" id="tl-srm" hidden>
+                  <p class="tl-note">Computer science foundations that led into data engineering. Graduated 2025.</p>
+                  <ul class="edu-list">
+                    <li><span class="yr">2021</span> Class XII (CBSE), Al-Hira Model School, Chennai</li>
+                    <li><span class="yr">2019</span> Class X (CBSE), Al-Hira Model School, Chennai</li>
+                  </ul>
+                </div>
+              </div>
+            </li>
           </ol>
-          <p class="lc-foot" aria-hidden="true"><span>pipeline ready</span><span>data flow active</span></p>
-        </figure>
-      </div>
-
-      <a href="#about" class="scroll-hint" aria-label="Scroll to About"><span aria-hidden="true">scroll</span><svg class="ico" aria-hidden="true"><use href="#i-down"/></svg></a>
-    </section>
-
-    <!-- home section ends -->
-
-    <!-- about section starts  -->
-
-    <section class="section" id="about" aria-labelledby="about-h">
-      <header class="section-head">
-        <p class="cmd" aria-hidden="true"><span class="sn">01</span> <span class="ps">$</span> cat about.txt</p>
-        <h2 id="about-h"><span data-scramble>About</span></h2>
-      </header>
-
-      <div class="about-grid">
-        <div class="about-text reveal">
-          <p class="lead">Data Engineer building production data pipelines and analytics systems on the lakehouse.</p>
-          <p>I design and run batch and streaming pipelines with PySpark, SQL and Databricks, and I care about the parts that make data trustworthy: clean modelling, data quality checks, and pipelines that fail loudly instead of silently.</p>
-
-          <ol class="path" aria-label="Path so far">
-            <li><span class="path-k">Computer Science</span><span class="path-v">BTech CSE, SRM IST, 2025</span></li>
-            <li><span class="path-k">Data Engineering</span><span class="path-v">Data Engineer at TMRW, since Aug 2024</span></li>
-            <li><span class="path-k">Real-world data systems</span><span class="path-v">Pipelines, lakehouses, analytics</span></li>
-          </ol>
         </div>
+      </section>
 
-        <div class="panel reveal">
-          <div class="panel-bar" aria-hidden="true">
-            <span class="dots"><i></i><i></i><i></i></span>
-            <span class="panel-title">profile.yaml</span>
+      <!-- 04 PROJECTS: four cards, identical structure and size, no featured project -->
+      <section class="section section-intense" id="projects" aria-labelledby="proj-h">
+        <div class="wrap">
+          <header class="section-head">
+            <p class="eyebrow"><span class="sn">04</span> <span data-scramble>Projects / Systems</span></p>
+            <h2 id="proj-h">Systems I've built.</h2>
+            <p class="section-sub">Each card opens the system: problem, architecture, engineering notes and repository.</p>
+          </header>
+
+          <div class="project-grid">
+            <article class="project" data-cursor="access" aria-labelledby="p1-h">
+              <div class="p-bar"><span class="p-id">P-01</span><span class="p-type">Batch ETL · serverless</span></div>
+              <h3 id="p1-h" class="p-name">Spotify ETL Pipeline on AWS</h3>
+              <p class="p-status"><span class="led" aria-hidden="true"></span>Status: complete</p>
+              <dl class="p-fields">
+                <div><dt>Problem</dt><dd>Turn weekly Spotify Top 50 playlist data into something you can query with SQL.</dd></div>
+                <div><dt>Approach</dt><dd>Scheduled Lambda extract, S3-triggered transform into album, artist and song datasets, Glue catalog.</dd></div>
+                <div><dt>Result</dt><dd>Three structured datasets in S3, queryable in Athena, refreshed on a weekly schedule.</dd></div>
+              </dl>
+              <ul class="tags" aria-label="Stack"><li>Python</li><li>AWS Lambda</li><li>S3</li><li>Glue</li><li>Athena</li><li>EventBridge</li></ul>
+              <div class="p-actions">
+                <button type="button" class="btn btn-sm btn-primary" data-open="dlg-p1" aria-haspopup="dialog">View system<span class="sr-only">: Spotify ETL Pipeline on AWS</span></button>
+                <a class="btn btn-sm" href="https://github.com/SuhailAhmedd/Spotify-Data-Pipeline-using-AWS" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-github"/></svg> GitHub<span class="sr-only"> (Spotify ETL repository, opens in a new tab)</span></a>
+              </div>
+            </article>
+
+            <article class="project" data-cursor="access" aria-labelledby="p2-h">
+              <div class="p-bar"><span class="p-id">P-02</span><span class="p-type">Streaming · Kafka</span></div>
+              <h3 id="p2-h" class="p-name">Real-Time Stock Market Pipeline</h3>
+              <p class="p-status"><span class="led" aria-hidden="true"></span>Status: complete</p>
+              <dl class="p-fields">
+                <div><dt>Problem</dt><dd>Move stock market records as a live stream instead of a batch file, and still query them with SQL.</dd></div>
+                <div><dt>Approach</dt><dd>Python producer to Kafka running on EC2, Python consumer writing to S3, Glue crawler for the catalog.</dd></div>
+                <div><dt>Result</dt><dd>Streamed records land in S3 and are queryable in Athena as they arrive.</dd></div>
+              </dl>
+              <ul class="tags" aria-label="Stack"><li>Python</li><li>Apache Kafka</li><li>AWS EC2</li><li>S3</li><li>Glue</li><li>Athena</li></ul>
+              <div class="p-actions">
+                <button type="button" class="btn btn-sm btn-primary" data-open="dlg-p2" aria-haspopup="dialog">View system<span class="sr-only">: Real-Time Stock Market Pipeline</span></button>
+                <a class="btn btn-sm" href="https://github.com/SuhailAhmedd/Real-Time-Stock-Market-Data-Pipeline-using-Kafka" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-github"/></svg> GitHub<span class="sr-only"> (stock market pipeline repository, opens in a new tab)</span></a>
+              </div>
+            </article>
+
+            <article class="project" data-cursor="access" aria-labelledby="p3-h">
+              <div class="p-bar"><span class="p-id">P-03</span><span class="p-type">Batch · Spark analytics</span></div>
+              <h3 id="p3-h" class="p-name">IPL Data Analysis with Apache Spark</h3>
+              <p class="p-status"><span class="led" aria-hidden="true"></span>Status: complete</p>
+              <dl class="p-fields">
+                <div><dt>Problem</dt><dd>Analyse IPL match, player and team data across seasons with distributed processing.</dd></div>
+                <div><dt>Approach</dt><dd>Dataset in S3, PySpark ETL on Databricks, Spark SQL for aggregations, filters and joins.</dd></div>
+                <div><dt>Result</dt><dd>SQL analyses of match and player performance, visualized with Matplotlib and Seaborn.</dd></div>
+              </dl>
+              <ul class="tags" aria-label="Stack"><li>PySpark</li><li>Spark SQL</li><li>Databricks</li><li>S3</li><li>Matplotlib</li></ul>
+              <div class="p-actions">
+                <button type="button" class="btn btn-sm btn-primary" data-open="dlg-p3" aria-haspopup="dialog">View system<span class="sr-only">: IPL Data Analysis with Apache Spark</span></button>
+                <a class="btn btn-sm" href="https://github.com/SuhailAhmedd/IPL-Data-Analysis-using-Apache-Spark" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-github"/></svg> GitHub<span class="sr-only"> (IPL analysis repository, opens in a new tab)</span></a>
+              </div>
+            </article>
+
+            <article class="project" data-cursor="access" aria-labelledby="p4-h">
+              <div class="p-bar"><span class="p-id">P-04</span><span class="p-type">Lakehouse · batch + streaming</span></div>
+              <h3 id="p4-h" class="p-name">ShopStream Databricks Lakehouse</h3>
+              <p class="p-status"><span class="led" aria-hidden="true"></span>Status: complete</p>
+              <dl class="p-fields">
+                <div><dt>Problem</dt><dd>E-commerce orders arrive as bulk CSVs and live JSON events, with duplicates and bad values.</dd></div>
+                <div><dt>Approach</dt><dd>COPY INTO and Auto Loader into Bronze, cleaning in Silver, aggregates in Gold, Lakeflow orchestration.</dd></div>
+                <div><dt>Result</dt><dd>13,717 raw order lines cleaned to 13,228 trusted rows, three Gold tables and a sales dashboard.</dd></div>
+              </dl>
+              <ul class="tags" aria-label="Stack"><li>Databricks</li><li>PySpark</li><li>SQL</li><li>Delta Lake</li><li>Unity Catalog</li><li>Lakeflow</li></ul>
+              <div class="p-actions">
+                <button type="button" class="btn btn-sm btn-primary" data-open="dlg-p4" aria-haspopup="dialog">View system<span class="sr-only">: ShopStream Databricks Lakehouse</span></button>
+                <a class="btn btn-sm" href="https://github.com/SuhailAhmedd/shopstream-lakehouse" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-github"/></svg> GitHub<span class="sr-only"> (ShopStream repository, opens in a new tab)</span></a>
+              </div>
+            </article>
           </div>
-          <div class="profile">
-            <img class="avatar" src="suhail.png" alt="Portrait of Suhail Ahmed" width="88" height="88" loading="lazy">
-            <dl class="kv">
-              <div><dt>name</dt><dd>Suhail Ahmed</dd></div>
-              <div><dt>role</dt><dd>Data Engineer</dd></div>
-              <div><dt>company</dt><dd>TMRW / House of Brands</dd></div>
-              <div><dt>stack</dt><dd>Databricks, PySpark, SQL</dd></div>
-              <div><dt>location</dt><dd>Bengaluru, India</dd></div>
-            </dl>
+
+          <p class="more-gh"><a href="https://github.com/SuhailAhmedd?tab=repositories" target="_blank" rel="noopener"><span class="prompt" aria-hidden="true">$</span> ls github.com/SuhailAhmedd<svg class="ico" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only"> (all repositories, opens in a new tab)</span></a></p>
+        </div>
+      </section>
+
+      <!-- 05 STACK -->
+      <section class="section" id="stack" aria-labelledby="stack-h">
+        <div class="wrap">
+          <header class="section-head">
+            <p class="eyebrow"><span class="sn">05</span> <span data-scramble>Stack / Data plane</span></p>
+            <h2 id="stack-h">The data stack, as a DAG.</h2>
+            <p class="section-sub">Tools read left to right the way data moves through them. Select any node to see how it connects and where it's used. No percentages: <span class="tier-key core">core stack</span> is daily production work, <span class="tier-key">working knowledge</span> comes from projects and study.</p>
+          </header>
+
+          <div class="dag reveal" id="dag">
+            <svg class="dag-edges" id="dag-edges" aria-hidden="true"></svg>
+            <div class="dag-cols">
+              <div class="dag-col" data-col="languages">
+                <h3 class="dag-h">Languages</h3>
+                <ul>
+                  <li><button type="button" class="node core" data-node="python">Python</button></li>
+                  <li><button type="button" class="node core" data-node="sql">SQL</button></li>
+                </ul>
+              </div>
+              <div class="dag-col" data-col="processing">
+                <h3 class="dag-h">Processing</h3>
+                <ul>
+                  <li><button type="button" class="node core" data-node="pyspark">PySpark</button></li>
+                  <li><button type="button" class="node" data-node="spark">Apache Spark</button></li>
+                  <li><button type="button" class="node" data-node="sparksql">Spark SQL</button></li>
+                </ul>
+              </div>
+              <div class="dag-col" data-col="lakehouse">
+                <h3 class="dag-h">Lakehouse</h3>
+                <ul>
+                  <li><button type="button" class="node core" data-node="databricks">Databricks</button></li>
+                  <li><button type="button" class="node core" data-node="delta">Delta Lake</button></li>
+                  <li><button type="button" class="node core" data-node="uc">Unity Catalog</button></li>
+                </ul>
+              </div>
+              <div class="dag-col" data-col="cloud">
+                <h3 class="dag-h">Cloud</h3>
+                <ul>
+                  <li><button type="button" class="node core" data-node="s3">AWS S3</button></li>
+                  <li><button type="button" class="node" data-node="lambda">AWS Lambda</button></li>
+                  <li><button type="button" class="node" data-node="glue">AWS Glue</button></li>
+                  <li><button type="button" class="node" data-node="athena">Amazon Athena</button></li>
+                  <li><button type="button" class="node" data-node="ec2">Amazon EC2</button></li>
+                  <li><button type="button" class="node" data-node="eventbridge">EventBridge</button></li>
+                </ul>
+              </div>
+              <div class="dag-col" data-col="flow">
+                <h3 class="dag-h">Stream &amp; orchestrate</h3>
+                <ul>
+                  <li><button type="button" class="node" data-node="kafka">Apache Kafka</button></li>
+                  <li><button type="button" class="node" data-node="lakeflow">Lakeflow Jobs</button></li>
+                  <li><button type="button" class="node" data-node="airflow">Airflow</button></li>
+                </ul>
+              </div>
+              <div class="dag-col" data-col="data">
+                <h3 class="dag-h">Data</h3>
+                <ul>
+                  <li><button type="button" class="node" data-node="etl">ETL / ELT</button></li>
+                  <li><button type="button" class="node" data-node="dq">Data Quality</button></li>
+                  <li><button type="button" class="node" data-node="dv">Data Validation</button></li>
+                  <li><button type="button" class="node" data-node="analytics">Analytics</button></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="dag-lane">
+              <h3 class="dag-h">AI-augmented engineering</h3>
+              <ul>
+                <li><button type="button" class="node" data-node="claude">Claude Code</button></li>
+                <li><button type="button" class="node" data-node="mcp">MCP</button></li>
+                <li><button type="button" class="node" data-node="aidev">AI-assisted development</button></li>
+              </ul>
+            </div>
+
+            <div class="dag-info" id="dag-info" aria-live="polite">
+              <p class="di-hint">Select a node to inspect it.</p>
+            </div>
+          </div>
+
+          <details class="skills-index reveal">
+            <summary>Full skills index <span aria-hidden="true">(concepts and practices)</span></summary>
+            <div class="si-grid">
+              <div><h3>Data engineering</h3><p>ETL, ELT, data pipelines, ingestion, transformation, batch processing, streaming</p></div>
+              <div><h3>Big data</h3><p>Distributed computing, partitioning, caching, Spark optimization</p></div>
+              <div><h3>Lakehouse</h3><p>Medallion architecture, Auto Loader, Lakeflow, Databricks CLI, Parquet</p></div>
+              <div><h3>Streaming</h3><p>Kafka producers and consumers, event streaming, real-time pipelines</p></div>
+              <div><h3>Orchestration</h3><p>DAGs, scheduling, task dependencies, retries, backfills</p></div>
+              <div><h3>Data quality</h3><p>Schema validation, null checks, duplicate detection, primary key validation, format validation, data profiling, anomaly detection, reconciliation</p></div>
+              <div><h3>Warehousing &amp; architecture</h3><p>Data warehousing, dimensional modeling, star schema, fact and dimension tables, data marts, data lakes, lineage, governance</p></div>
+              <div><h3>Build &amp; DevOps</h3><p>Bash, Git, GitHub, Docker, Linux, CI/CD, REST APIs, AWS IAM</p></div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- DATA TERMINAL -->
+      <section class="section" id="terminal" aria-labelledby="term-h">
+        <div class="wrap">
+          <header class="section-head">
+            <p class="eyebrow"><span class="sn">&gt;_</span> <span data-scramble>Data terminal</span></p>
+            <h2 id="term-h">Query the profile.</h2>
+            <p class="section-sub">Click a command, or type one. Everything here is also elsewhere on the page.</p>
+          </header>
+
+          <div class="term panel reveal">
+            <div class="panel-bar">
+              <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="panel-title">suhail@data-node:~$</span>
+            </div>
+            <div class="term-cmds" role="group" aria-label="Commands">
+              <button type="button" data-cmd="help">help</button>
+              <button type="button" data-cmd="about">about</button>
+              <button type="button" data-cmd="stack">stack</button>
+              <button type="button" data-cmd="projects">projects</button>
+              <button type="button" data-cmd="experience">experience</button>
+              <button type="button" data-cmd="contact">contact</button>
+              <button type="button" data-cmd="github">github</button>
+              <button type="button" data-cmd="clear">clear</button>
+            </div>
+            <div class="term-out" id="term-out" role="log" aria-live="polite" aria-label="Terminal output" tabindex="0">
+              <p class="t-dim">suhail@data-node ready. Type <b>help</b> or click a command above.</p>
+            </div>
+            <form class="term-in" id="term-form" autocomplete="off">
+              <label for="term-input"><span class="t-prompt" aria-hidden="true">suhail@data-node:~$</span><span class="sr-only">Terminal command</span></label>
+              <input id="term-input" type="text" spellcheck="false" autocapitalize="off" enterkeyhint="send" placeholder="help">
+            </form>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- about section ends -->
-
-    <!-- skills section starts  -->
-
-    <section class="section" id="skills" aria-labelledby="skills-h">
-      <header class="section-head">
-        <p class="cmd" aria-hidden="true"><span class="sn">02</span> <span class="ps">$</span> SELECT * FROM skills;</p>
-        <h2 id="skills-h"><span data-scramble>Skills</span></h2>
-      </header>
-
-      <p class="skill-legend"><span class="core-key">Core stack</span> used every day in production work. Everything else is working knowledge from projects and study.</p>
-
-      <div class="skill-grid">
-        <article class="skill reveal">
-          <h3><span class="sk-stage">ingest</span>Data Engineering</h3>
-          <ul class="chips">
-            <li>ETL</li><li>ELT</li><li>Data Pipelines</li><li>Data Ingestion</li><li>Data Transformation</li><li>Batch Processing</li><li>Streaming</li>
-          </ul>
-        </article>
-
-        <article class="skill reveal">
-          <h3><span class="sk-stage">transform</span>Big Data</h3>
-          <ul class="chips">
-            <li class="core">PySpark</li><li>Apache Spark</li><li>Spark SQL</li><li>Distributed Computing</li><li>Partitioning</li><li>Caching</li><li>Optimization</li>
-          </ul>
-        </article>
-
-        <article class="skill reveal">
-          <h3><span class="sk-stage">store</span>Lakehouse</h3>
-          <ul class="chips">
-            <li class="core">Databricks</li><li class="core">Delta Lake</li><li class="core">Unity Catalog</li><li>Medallion Architecture</li><li>Auto Loader</li><li>Lakeflow</li><li>Databricks CLI</li><li>Parquet</li>
-          </ul>
-        </article>
-
-        <article class="skill reveal">
-          <h3><span class="sk-stage">cloud</span>AWS</h3>
-          <ul class="chips">
-            <li class="core">S3</li><li>Lambda</li><li>Glue</li><li>Athena</li><li>EC2</li><li>EventBridge</li><li>IAM</li>
-          </ul>
-        </article>
-
-        <article class="skill reveal">
-          <h3><span class="sk-stage">stream</span>Streaming</h3>
-          <ul class="chips">
-            <li>Apache Kafka</li><li>Producers</li><li>Consumers</li><li>Event Streaming</li><li>Real-Time Pipelines</li>
-          </ul>
-        </article>
-
-        <article class="skill reveal">
-          <h3><span class="sk-stage">orchestrate</span>Orchestration</h3>
-          <ul class="chips">
-            <li>Airflow</li><li>DAGs</li><li>Scheduling</li><li>Task Dependencies</li><li>Retries</li><li>Backfills</li>
-          </ul>
-        </article>
-
-        <article class="skill reveal">
-          <h3><span class="sk-stage">validate</span>Data Quality</h3>
-          <ul class="chips">
-            <li>Schema Validation</li><li>Null Checks</li><li>Duplicate Detection</li><li>Primary Key Validation</li><li>Format Validation</li><li>Data Profiling</li><li>Anomaly Detection</li><li>Reconciliation</li>
-          </ul>
-        </article>
-
-        <article class="skill reveal">
-          <h3><span class="sk-stage">model</span>Warehousing &amp; Architecture</h3>
-          <ul class="chips">
-            <li>Data Warehousing</li><li>Dimensional Modeling</li><li>Star Schema</li><li>Fact &amp; Dimension Tables</li><li>Data Marts</li><li>Data Lakes</li><li>Data Lineage</li><li>Data Governance</li>
-          </ul>
-        </article>
-
-        <article class="skill reveal">
-          <h3><span class="sk-stage">build</span>Languages &amp; DevOps</h3>
-          <ul class="chips">
-            <li class="core">Python</li><li class="core">SQL</li><li>Bash</li><li>Git</li><li>GitHub</li><li>Docker</li><li>Linux</li><li>CI/CD</li><li>REST APIs</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <!-- skills section ends -->
-
-    <!-- experience section starts  -->
-
-    <section class="section" id="experience" aria-labelledby="exp-h">
-      <header class="section-head">
-        <p class="cmd" aria-hidden="true"><span class="sn">03</span> <span class="ps">$</span> tail -f experience.log</p>
-        <h2 id="exp-h"><span data-scramble>Experience</span></h2>
-      </header>
-
-      <ol class="log">
-        <li class="log-entry reveal">
-          <div class="log-when">
-            <time datetime="2024-08">Aug 2024</time>
-            <span class="log-now">present</span>
+      <!-- RESUME -->
+      <section class="section section-calm" id="resume" aria-labelledby="resume-h">
+        <div class="wrap">
+          <div class="resume panel reveal">
+            <div class="resume-copy">
+              <p class="eyebrow">Resume / CV</p>
+              <h2 id="resume-h">Suhail Ahmed, Data Engineer</h2>
+              <ul class="resume-lines">
+                <li><span>Now</span>Data Engineer, TMRW / House of Brands, Aug 2024 to present</li>
+                <li><span>Stack</span>Python, SQL, PySpark, Databricks, Delta Lake, AWS S3</li>
+                <li><span>Education</span>BTech, Computer Science &amp; Engineering, SRM IST, 2025</li>
+              </ul>
+            </div>
+            <div class="resume-actions">
+              <a class="btn btn-primary" href="https://drive.google.com/file/d/1ThbYjsXAlbOLefxLMoA3nbwoMET0xoo9/view?usp=sharing" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-file"/></svg> View resume<span class="sr-only"> (PDF, opens in a new tab)</span></a>
+              <a class="btn" href="https://drive.google.com/uc?export=download&amp;id=1ThbYjsXAlbOLefxLMoA3nbwoMET0xoo9" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-download"/></svg> Download resume</a>
+            </div>
           </div>
-          <div class="log-body">
-            <h3><span class="title">Data Engineer</span> <span class="log-dash" aria-hidden="true">──</span> <span class="company">TMRW / House of Brands</span></h3>
-            <p class="log-flow" aria-label="Typical workflow: raw data on S3, PySpark and SQL on Databricks, quality checks, Delta tables, reporting">
-              <span>S3 raw data</span><span>PySpark · SQL</span><span>quality checks</span><span>Delta tables</span><span>reporting</span>
-            </p>
-            <ul class="tree">
-              <li>Build and maintain production data pipelines and ETL workflows on Databricks using PySpark and SQL.</li>
-              <li>Process financial and e-commerce data stored on AWS S3 into clean, analytics-ready tables.</li>
-              <li>Implement data validation and quality checks for nulls, duplicates and schema changes so downstream analytics can be trusted.</li>
-              <li>Deliver curated analytics datasets and SQL models for reporting and business analysis.</li>
-            </ul>
-            <ul class="tags">
-              <li>Databricks</li><li>PySpark</li><li>SQL</li><li>Delta Lake</li><li>S3</li><li>Unity Catalog</li><li>ETL</li><li>Data Validation</li><li>Data Quality</li><li>Finance Analytics</li><li>E-commerce Data</li>
-            </ul>
-          </div>
-        </li>
-      </ol>
-    </section>
-
-    <!-- experience section ends -->
-
-    <!-- projects section starts  -->
-
-    <section class="section" id="projects" aria-labelledby="proj-h">
-      <header class="section-head">
-        <p class="cmd" aria-hidden="true"><span class="sn">04</span> <span class="ps">$</span> ls pipelines/</p>
-        <h2 id="proj-h"><span data-scramble>Projects</span></h2>
-      </header>
-
-      <!-- every project uses the same card: number, name, summary, flow, stack, GitHub link -->
-      <div class="project-grid">
-        <article class="project panel card-hover" aria-labelledby="p1-h">
-          <div class="panel-bar" aria-hidden="true">
-            <span class="p-num">P-01</span>
-            <span class="panel-title">spotify-etl</span>
-            <span class="mode">batch</span>
-          </div>
-          <div class="project-body">
-            <h3 id="p1-h"><span data-scramble data-scramble-card>Spotify ETL Pipeline on AWS</span></h3>
-            <p class="p-desc">Serverless ETL that pulls Spotify Top 50 playlist data on a weekly schedule, transforms it with Lambda and makes it queryable in Athena.</p>
-            <ol class="flow" aria-label="Architecture">
-              <li><span class="fl-k">source</span><span class="fl-v">Spotify API</span></li>
-              <li><span class="fl-k">ingest</span><span class="fl-v">Lambda + EventBridge</span></li>
-              <li><span class="fl-k">transform</span><span class="fl-v">Lambda</span></li>
-              <li><span class="fl-k">store</span><span class="fl-v">S3 + Glue Catalog</span></li>
-              <li><span class="fl-k">query</span><span class="fl-v">Athena</span></li>
-            </ol>
-            <ul class="tags" aria-label="Tech stack">
-              <li>Python</li><li>AWS Lambda</li><li>S3</li><li>Glue</li><li>Athena</li><li>EventBridge</li>
-            </ul>
-            <a class="btn btn-sm gh-btn" href="https://github.com/SuhailAhmedd/Spotify-Data-Pipeline-using-AWS" target="_blank" rel="noopener">
-              <svg class="ico" aria-hidden="true"><use href="#i-github"/></svg> View on GitHub <span class="arrow" aria-hidden="true">→</span><span class="sr-only"> (Spotify ETL repository, opens in a new tab)</span>
-            </a>
-          </div>
-        </article>
-
-        <article class="project panel card-hover" aria-labelledby="p2-h">
-          <div class="panel-bar" aria-hidden="true">
-            <span class="p-num">P-02</span>
-            <span class="panel-title">stock-stream</span>
-            <span class="mode">streaming</span>
-          </div>
-          <div class="project-body">
-            <h3 id="p2-h"><span data-scramble data-scramble-card>Real-Time Stock Market Pipeline</span></h3>
-            <p class="p-desc">Streams stock market data through Kafka running on EC2 into S3, catalogued with Glue and queried with Athena.</p>
-            <ol class="flow" aria-label="Architecture">
-              <li><span class="fl-k">source</span><span class="fl-v">Python producer</span></li>
-              <li><span class="fl-k">stream</span><span class="fl-v">Kafka on EC2</span></li>
-              <li><span class="fl-k">consume</span><span class="fl-v">Python consumer</span></li>
-              <li><span class="fl-k">store</span><span class="fl-v">S3 + Glue Catalog</span></li>
-              <li><span class="fl-k">query</span><span class="fl-v">Athena</span></li>
-            </ol>
-            <ul class="tags" aria-label="Tech stack">
-              <li>Python</li><li>Apache Kafka</li><li>AWS EC2</li><li>S3</li><li>Glue</li><li>Athena</li>
-            </ul>
-            <a class="btn btn-sm gh-btn" href="https://github.com/SuhailAhmedd/Real-Time-Stock-Market-Data-Pipeline-using-Kafka" target="_blank" rel="noopener">
-              <svg class="ico" aria-hidden="true"><use href="#i-github"/></svg> View on GitHub <span class="arrow" aria-hidden="true">→</span><span class="sr-only"> (stock market pipeline repository, opens in a new tab)</span>
-            </a>
-          </div>
-        </article>
-
-        <article class="project panel card-hover" aria-labelledby="p3-h">
-          <div class="panel-bar" aria-hidden="true">
-            <span class="p-num">P-03</span>
-            <span class="panel-title">ipl-analytics</span>
-            <span class="mode">batch</span>
-          </div>
-          <div class="project-body">
-            <h3 id="p3-h"><span data-scramble data-scramble-card>IPL Data Analysis with Apache Spark</span></h3>
-            <p class="p-desc">PySpark ETL and Spark SQL analysis of IPL match and player data on Databricks, with the dataset stored in S3 and results visualized in Python.</p>
-            <ol class="flow" aria-label="Architecture">
-              <li><span class="fl-k">source</span><span class="fl-v">IPL CSV data</span></li>
-              <li><span class="fl-k">store</span><span class="fl-v">S3</span></li>
-              <li><span class="fl-k">transform</span><span class="fl-v">PySpark on Databricks</span></li>
-              <li><span class="fl-k">analyze</span><span class="fl-v">Spark SQL</span></li>
-              <li><span class="fl-k">visualize</span><span class="fl-v">Matplotlib</span></li>
-            </ol>
-            <ul class="tags" aria-label="Tech stack">
-              <li>PySpark</li><li>Spark SQL</li><li>Databricks</li><li>S3</li><li>Matplotlib</li>
-            </ul>
-            <a class="btn btn-sm gh-btn" href="https://github.com/SuhailAhmedd/IPL-Data-Analysis-using-Apache-Spark" target="_blank" rel="noopener">
-              <svg class="ico" aria-hidden="true"><use href="#i-github"/></svg> View on GitHub <span class="arrow" aria-hidden="true">→</span><span class="sr-only"> (IPL analysis repository, opens in a new tab)</span>
-            </a>
-          </div>
-        </article>
-
-        <article class="project panel card-hover" aria-labelledby="p4-h">
-          <div class="panel-bar" aria-hidden="true">
-            <span class="p-num">P-04</span>
-            <span class="panel-title">shopstream-lakehouse</span>
-            <span class="mode">batch + streaming</span>
-          </div>
-          <div class="project-body">
-            <h3 id="p4-h"><span data-scramble data-scramble-card>ShopStream Databricks Lakehouse</span></h3>
-            <p class="p-desc">E-commerce analytics lakehouse on Databricks: batch CSVs and streaming JSON events flow through Bronze, Silver and Gold Delta tables into a sales dashboard.</p>
-            <ol class="flow" aria-label="Architecture">
-              <li><span class="fl-k">source</span><span class="fl-v">CSV + JSON events</span></li>
-              <li><span class="fl-k">ingest</span><span class="fl-v">COPY INTO · Auto Loader</span></li>
-              <li><span class="fl-k">transform</span><span class="fl-v">Bronze → Gold Delta</span></li>
-              <li><span class="fl-k">orchestrate</span><span class="fl-v">Lakeflow Jobs</span></li>
-              <li><span class="fl-k">analyze</span><span class="fl-v">Databricks SQL</span></li>
-            </ol>
-            <ul class="tags" aria-label="Tech stack">
-              <li>Databricks</li><li>PySpark</li><li>Delta Lake</li><li>Unity Catalog</li><li>Lakeflow</li>
-            </ul>
-            <a class="btn btn-sm gh-btn" href="https://github.com/SuhailAhmedd/shopstream-lakehouse" target="_blank" rel="noopener">
-              <svg class="ico" aria-hidden="true"><use href="#i-github"/></svg> View on GitHub <span class="arrow" aria-hidden="true">→</span><span class="sr-only"> (ShopStream repository, opens in a new tab)</span>
-            </a>
-          </div>
-        </article>
-      </div>
-
-      <p class="more-gh"><a href="https://github.com/SuhailAhmedd?tab=repositories" target="_blank" rel="noopener"><span class="ps" aria-hidden="true">$</span> ls github.com/SuhailAhmedd <span class="ext" aria-hidden="true">↗</span><span class="sr-only"> (all repositories, opens in a new tab)</span></a></p>
-    </section>
-
-    <!-- projects section ends -->
-
-    <!-- education section starts  -->
-
-    <section class="section" id="education" aria-labelledby="edu-h">
-      <header class="section-head">
-        <p class="cmd" aria-hidden="true"><span class="sn">05</span> <span class="ps">$</span> cat education.log</p>
-        <h2 id="edu-h"><span data-scramble>Education</span></h2>
-      </header>
-
-      <ol class="edu reveal">
-        <li><span class="yr">2025</span><span><strong>BTech, Computer Science &amp; Engineering</strong> SRM Institute of Science and Technology, Chennai</span></li>
-        <li><span class="yr">2021</span><span><strong>Class XII (CBSE)</strong> Al-Hira Model School, Chennai</span></li>
-        <li><span class="yr">2019</span><span><strong>Class X (CBSE)</strong> Al-Hira Model School, Chennai</span></li>
-      </ol>
-    </section>
-
-    <!-- education section ends -->
-
-    <!-- contact section starts  -->
-
-    <section class="section" id="contact" aria-labelledby="contact-h">
-      <header class="section-head">
-        <p class="cmd" aria-hidden="true"><span class="sn">06</span> <span class="ps">$</span> connect --with suhail</p>
-        <h2 id="contact-h"><span data-scramble>Contact</span></h2>
-      </header>
-
-      <div class="contact-grid">
-        <div class="contact-links reveal">
-          <p class="lead">Hiring for a data role, or want to talk pipelines? Reach out.</p>
-          <ul class="links">
-            <li><a href="mailto:suhailahmed030803@gmail.com"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg><span class="lk-label">Email</span><span class="lk-val">suhailahmed030803@gmail.com</span></a></li>
-            <li><a href="https://www.linkedin.com/in/suhail--ahmed/" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-linkedin"/></svg><span class="lk-label">LinkedIn</span><span class="lk-val">in/suhail--ahmed <span aria-hidden="true">↗</span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
-            <li><a href="https://github.com/SuhailAhmedd" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-github"/></svg><span class="lk-label">GitHub</span><span class="lk-val">github.com/SuhailAhmedd <span aria-hidden="true">↗</span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
-            <li><a href="https://drive.google.com/file/d/1ThbYjsXAlbOLefxLMoA3nbwoMET0xoo9/view?usp=sharing" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-file"/></svg><span class="lk-label">Resume</span><span class="lk-val">View PDF <span aria-hidden="true">↗</span></span><span class="sr-only"> (opens in a new tab)</span></a></li>
-          </ul>
         </div>
+      </section>
 
-        <!-- Replace YOUR_FORM_ID with the ID from your Formspree form (https://formspree.io).
-             Until then, submitting opens the visitor's email app addressed to you instead. -->
-        <form id="contact-form" class="panel reveal" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-          <div class="panel-bar" aria-hidden="true">
-            <span class="dots"><i></i><i></i><i></i></span>
-            <span class="panel-title">new_message.sh</span>
-          </div>
-          <div class="form-body">
-            <label for="cf-name"><span aria-hidden="true">--</span>name</label>
-            <input type="text" id="cf-name" name="name" placeholder="Your name" autocomplete="name" required>
-            <label for="cf-email"><span aria-hidden="true">--</span>email</label>
-            <input type="email" id="cf-email" name="email" placeholder="you@company.com" autocomplete="email" required>
-            <label for="message"><span aria-hidden="true">--</span>message</label>
-            <textarea name="message" id="message" rows="5" placeholder="What would you like to talk about?" required></textarea>
-            <button type="submit" class="btn btn-primary">
-              <span class="br" aria-hidden="true">[</span> Send Message <span class="br" aria-hidden="true">]</span>
-            </button>
-            <p class="form-status" role="status" aria-live="polite"></p>
-          </div>
-        </form>
-      </div>
-    </section>
+      <!-- 06 CONTACT -->
+      <section class="section" id="contact" aria-labelledby="contact-h">
+        <div class="wrap">
+          <header class="section-head">
+            <p class="eyebrow"><span class="sn">06</span> <span data-scramble>Contact / Transmission</span></p>
+            <h2 id="contact-h">Establish connection.</h2>
+          </header>
 
-    <!-- contact section ends -->
+          <div class="contact-grid">
+            <div class="contact-copy reveal">
+              <p class="lead">If you're working on</p>
+              <ul class="topics">
+                <li>Data platforms</li><li>Analytics</li><li>Pipelines</li><li>Lakehouses</li><li>Data infrastructure</li>
+              </ul>
+              <p class="lead">let's talk.</p>
+
+              <ul class="links">
+                <li><a href="mailto:suhailahmed030803@gmail.com"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg><span class="lk-k">Email</span><span class="lk-v">suhailahmed030803@gmail.com</span></a></li>
+                <li><a href="https://www.linkedin.com/in/suhail--ahmed/" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-linkedin"/></svg><span class="lk-k">LinkedIn</span><span class="lk-v">in/suhail--ahmed</span><span class="sr-only"> (opens in a new tab)</span></a></li>
+                <li><a href="https://github.com/SuhailAhmedd" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-github"/></svg><span class="lk-k">GitHub</span><span class="lk-v">github.com/SuhailAhmedd</span><span class="sr-only"> (opens in a new tab)</span></a></li>
+              </ul>
+            </div>
+
+            <!-- Replace YOUR_FORM_ID with the ID from your Formspree form (https://formspree.io).
+                 Until then, submitting opens the visitor's email app addressed to you instead. -->
+            <form id="contact-form" class="panel tx reveal" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+              <div class="panel-bar">
+                <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="panel-title">transmit.sh</span>
+              </div>
+              <div class="form-body">
+                <label for="cf-name"><span aria-hidden="true">--</span>name</label>
+                <input type="text" id="cf-name" name="name" placeholder="Your name" autocomplete="name" required>
+                <label for="cf-email"><span aria-hidden="true">--</span>email</label>
+                <input type="email" id="cf-email" name="email" placeholder="you@company.com" autocomplete="email" required>
+                <label for="cf-message"><span aria-hidden="true">--</span>message</label>
+                <textarea name="message" id="cf-message" rows="5" placeholder="What are you building?" required></textarea>
+                <button type="submit" class="btn btn-primary">Transmit message <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+                <p class="form-status" role="status" aria-live="polite"></p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
 
     </main>
 
     <footer class="footer">
-      <p><span class="ps">$</span> echo "© Suhail Ahmed, Data Engineer"</p>
-      <a href="#home" class="to-top">cd ~ <svg class="ico" aria-hidden="true"><use href="#i-up"/></svg></a>
+      <div class="wrap footer-inner">
+        <div>
+          <p class="f-name">Suhail Ahmed</p>
+          <p class="f-role">Data Engineer</p>
+        </div>
+        <p class="f-status"><span class="led" aria-hidden="true"></span>System status: online</p>
+        <ul class="f-links">
+          <li><a href="https://github.com/SuhailAhmedd" target="_blank" rel="noopener">GitHub<span class="sr-only"> (opens in a new tab)</span></a></li>
+          <li><a href="https://www.linkedin.com/in/suhail--ahmed/" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a></li>
+          <li><a href="#home">Back to top</a></li>
+        </ul>
+        <p class="f-copy">© 2026 Suhail Ahmed</p>
+      </div>
     </footer>
 
-    <!-- custom js file link  -->
-    <script src="script.js?v=20260926c"></script>
+    <!-- project case studies: one dialog per project, same structure for all four -->
+
+    <dialog class="sys" id="dlg-p1" aria-labelledby="dlg-p1-h">
+      <div class="sys-bar">
+        <span class="p-id">P-01</span><span class="sys-path">/systems/spotify-etl</span>
+        <button type="button" class="sys-close" data-close><svg class="ico" aria-hidden="true"><use href="#i-close"/></svg><span class="sr-only">Close</span></button>
+      </div>
+      <div class="sys-access" aria-hidden="true"><p>Accessing project P-01...</p><p>Authenticating...</p><p>Loading architecture...</p></div>
+      <div class="sys-body">
+        <p class="sys-type">Batch ETL · serverless · AWS</p>
+        <h2 id="dlg-p1-h" class="sys-title">Spotify ETL Pipeline on AWS</h2>
+
+        <h3 class="sys-h">Problem</h3>
+        <p>Playlist data from the Spotify API is nested JSON that changes weekly. The goal was an automated pipeline that extracts artist, album and song data from the Top 50 playlist and makes it available for SQL analysis without running any servers.</p>
+
+        <h3 class="sys-h">Architecture</h3>
+        <ol class="arch">
+          <li><span class="a-k">source</span><span class="a-v">Spotify API</span></li>
+          <li><span class="a-k">extract</span><span class="a-v">Lambda (Spotipy)</span><span class="a-n">EventBridge, weekly</span></li>
+          <li><span class="a-k">land</span><span class="a-v">S3 raw / to_process</span></li>
+          <li><span class="a-k">transform</span><span class="a-v">Lambda (Pandas)</span><span class="a-n">S3 event trigger</span></li>
+          <li><span class="a-k">store</span><span class="a-v">S3 transformed</span><span class="a-n">album · artist · song</span></li>
+          <li><span class="a-k">catalog</span><span class="a-v">Glue crawlers</span></li>
+          <li><span class="a-k">query</span><span class="a-v">Athena</span></li>
+        </ol>
+
+        <h3 class="sys-h">Engineering</h3>
+        <dl class="eng">
+          <div><dt>Ingestion</dt><dd>An extract Lambda calls the Spotify API through the Spotipy library, packaged as a Lambda layer, and writes raw JSON to <code>raw_data/to_process</code>. EventBridge runs it on a cron schedule every Tuesday.</dd></div>
+          <div><dt>Transformation</dt><dd>A new file in <code>to_process</code> triggers a second Lambda that uses Pandas to split the payload into album, artist and song datasets, then moves the raw file to <code>processed</code>.</dd></div>
+          <div><dt>Schema handling</dt><dd>One Glue crawler per dataset infers the schema and keeps the Glue Data Catalog current as new files arrive.</dd></div>
+          <div><dt>Storage</dt><dd>A single S3 bucket split into raw (to_process, processed) and transformed zones, so every run is traceable back to its raw extract.</dd></div>
+          <div><dt>Orchestration</dt><dd>Event driven end to end: a schedule starts extraction, and the S3 event starts transformation.</dd></div>
+          <div><dt>Monitoring</dt><dd>Lambda runs log to CloudWatch.</dd></div>
+        </dl>
+
+        <h3 class="sys-h">Technology</h3>
+        <ul class="tags"><li>Python</li><li>Spotipy</li><li>Pandas</li><li>AWS Lambda</li><li>S3</li><li>EventBridge</li><li>Glue</li><li>Athena</li><li>CloudWatch</li></ul>
+
+        <div class="sys-foot">
+          <a class="btn btn-primary" href="https://github.com/SuhailAhmedd/Spotify-Data-Pipeline-using-AWS" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-github"/></svg> Open repository<span class="sr-only"> (opens in a new tab)</span></a>
+          <button type="button" class="btn btn-ghost" data-close>Close</button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="sys" id="dlg-p2" aria-labelledby="dlg-p2-h">
+      <div class="sys-bar">
+        <span class="p-id">P-02</span><span class="sys-path">/systems/stock-stream</span>
+        <button type="button" class="sys-close" data-close><svg class="ico" aria-hidden="true"><use href="#i-close"/></svg><span class="sr-only">Close</span></button>
+      </div>
+      <div class="sys-access" aria-hidden="true"><p>Accessing project P-02...</p><p>Authenticating...</p><p>Loading architecture...</p></div>
+      <div class="sys-body">
+        <p class="sys-type">Streaming · Kafka · AWS</p>
+        <h2 id="dlg-p2-h" class="sys-title">Real-Time Stock Market Pipeline</h2>
+
+        <h3 class="sys-h">Problem</h3>
+        <p>Market data is only useful while it's fresh. This project builds the operational side of a streaming pipeline: moving stock market records through Kafka as events, landing them in cloud storage and keeping them queryable with SQL.</p>
+
+        <h3 class="sys-h">Architecture</h3>
+        <ol class="arch">
+          <li><span class="a-k">source</span><span class="a-v">Stock market dataset</span></li>
+          <li><span class="a-k">produce</span><span class="a-v">Python producer</span></li>
+          <li><span class="a-k">stream</span><span class="a-v">Kafka on EC2</span><span class="a-n">topics</span></li>
+          <li><span class="a-k">consume</span><span class="a-v">Python consumer</span></li>
+          <li><span class="a-k">store</span><span class="a-v">S3</span></li>
+          <li><span class="a-k">catalog</span><span class="a-v">Glue crawler</span></li>
+          <li><span class="a-k">query</span><span class="a-v">Athena</span></li>
+        </ol>
+
+        <h3 class="sys-h">Engineering</h3>
+        <dl class="eng">
+          <div><dt>Ingestion</dt><dd>A Kafka cluster runs on an EC2 instance. A Python producer publishes stock market records to Kafka topics as a stream of events.</dd></div>
+          <div><dt>Processing</dt><dd>A Python consumer reads from the topics, processes each record and writes it to S3.</dd></div>
+          <div><dt>Schema handling</dt><dd>A Glue crawler scans the S3 data and creates and updates tables in the Glue Data Catalog.</dd></div>
+          <div><dt>Storage</dt><dd>Raw and processed data are kept in S3.</dd></div>
+          <div><dt>Analytics</dt><dd>Athena queries the catalogued data directly in S3 with standard SQL.</dd></div>
+        </dl>
+
+        <h3 class="sys-h">Technology</h3>
+        <ul class="tags"><li>Python</li><li>Apache Kafka</li><li>AWS EC2</li><li>S3</li><li>Glue Crawler</li><li>Glue Data Catalog</li><li>Athena</li><li>SQL</li></ul>
+
+        <div class="sys-foot">
+          <a class="btn btn-primary" href="https://github.com/SuhailAhmedd/Real-Time-Stock-Market-Data-Pipeline-using-Kafka" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-github"/></svg> Open repository<span class="sr-only"> (opens in a new tab)</span></a>
+          <button type="button" class="btn btn-ghost" data-close>Close</button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="sys" id="dlg-p3" aria-labelledby="dlg-p3-h">
+      <div class="sys-bar">
+        <span class="p-id">P-03</span><span class="sys-path">/systems/ipl-analytics</span>
+        <button type="button" class="sys-close" data-close><svg class="ico" aria-hidden="true"><use href="#i-close"/></svg><span class="sr-only">Close</span></button>
+      </div>
+      <div class="sys-access" aria-hidden="true"><p>Accessing project P-03...</p><p>Authenticating...</p><p>Loading architecture...</p></div>
+      <div class="sys-body">
+        <p class="sys-type">Batch · Spark analytics · Databricks</p>
+        <h2 id="dlg-p3-h" class="sys-title">IPL Data Analysis with Apache Spark</h2>
+
+        <h3 class="sys-h">Problem</h3>
+        <p>IPL data covers matches, players, teams and seasons across many related files. The goal was to build an ETL pipeline and SQL analysis layer on distributed processing rather than a single-machine notebook.</p>
+
+        <h3 class="sys-h">Architecture</h3>
+        <ol class="arch">
+          <li><span class="a-k">source</span><span class="a-v">IPL dataset</span><span class="a-n">matches · players · teams</span></li>
+          <li><span class="a-k">store</span><span class="a-v">Amazon S3</span></li>
+          <li><span class="a-k">transform</span><span class="a-v">PySpark on Databricks</span></li>
+          <li><span class="a-k">analyze</span><span class="a-v">Spark SQL</span></li>
+          <li><span class="a-k">visualize</span><span class="a-v">Matplotlib · Seaborn</span></li>
+        </ol>
+
+        <h3 class="sys-h">Engineering</h3>
+        <dl class="eng">
+          <div><dt>Storage</dt><dd>The raw dataset lives in S3, which Databricks reads directly.</dd></div>
+          <div><dt>Transformation</dt><dd>A PySpark ETL on Databricks loads the files into Spark DataFrames and prepares them for analysis.</dd></div>
+          <div><dt>Analytics</dt><dd>Spark SQL queries aggregate, filter and join the match and player data.</dd></div>
+          <div><dt>Visualization</dt><dd>Results are plotted with Matplotlib and Seaborn.</dd></div>
+        </dl>
+
+        <h3 class="sys-h">Technology</h3>
+        <ul class="tags"><li>Python</li><li>PySpark</li><li>Apache Spark</li><li>Spark SQL</li><li>Databricks</li><li>Amazon S3</li><li>Matplotlib</li><li>Seaborn</li></ul>
+
+        <div class="sys-foot">
+          <a class="btn btn-primary" href="https://github.com/SuhailAhmedd/IPL-Data-Analysis-using-Apache-Spark" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-github"/></svg> Open repository<span class="sr-only"> (opens in a new tab)</span></a>
+          <button type="button" class="btn btn-ghost" data-close>Close</button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="sys" id="dlg-p4" aria-labelledby="dlg-p4-h">
+      <div class="sys-bar">
+        <span class="p-id">P-04</span><span class="sys-path">/systems/shopstream-lakehouse</span>
+        <button type="button" class="sys-close" data-close><svg class="ico" aria-hidden="true"><use href="#i-close"/></svg><span class="sr-only">Close</span></button>
+      </div>
+      <div class="sys-access" aria-hidden="true"><p>Accessing project P-04...</p><p>Authenticating...</p><p>Loading architecture...</p></div>
+      <div class="sys-body">
+        <p class="sys-type">Lakehouse · batch + streaming · Databricks</p>
+        <h2 id="dlg-p4-h" class="sys-title">ShopStream Databricks Lakehouse</h2>
+
+        <h3 class="sys-h">Problem</h3>
+        <p>A simulated e-commerce business has historical orders in CSV files and a live feed of JSON order events. The source data has double-fired order lines, impossible quantities and inconsistent status casing. Both paths need to end in one governed set of tables and a sales dashboard people can trust.</p>
+
+        <h3 class="sys-h">Architecture</h3>
+        <p class="arch-lane">batch</p>
+        <ol class="arch">
+          <li><span class="a-k">source</span><span class="a-v">Raw CSVs</span><span class="a-n">orders, customers, products</span></li>
+          <li><span class="a-k">ingest</span><span class="a-v">COPY INTO</span></li>
+          <li><span class="a-k">bronze</span><span class="a-v">Delta, as landed</span></li>
+          <li><span class="a-k">silver</span><span class="a-v">Cleaned, typed, deduped</span></li>
+          <li><span class="a-k">gold</span><span class="a-v">Aggregates</span></li>
+          <li><span class="a-k">analytics</span><span class="a-v">Sales dashboard</span></li>
+        </ol>
+        <p class="arch-lane">streaming</p>
+        <ol class="arch">
+          <li><span class="a-k">source</span><span class="a-v">Live JSON events</span></li>
+          <li><span class="a-k">ingest</span><span class="a-v">Auto Loader</span></li>
+          <li><span class="a-k">bronze</span><span class="a-v">Streaming table</span></li>
+          <li><span class="a-k">pipeline</span><span class="a-v">Lakeflow declarative</span></li>
+          <li><span class="a-k">serve</span><span class="a-v">Daily revenue view</span></li>
+        </ol>
+
+        <h3 class="sys-h">Engineering</h3>
+        <dl class="eng">
+          <div><dt>Ingestion</dt><dd>Historical CSVs load with idempotent <code>COPY INTO</code>, so re-runs never duplicate data. Live JSON events arrive through Auto Loader with a checkpoint: the first run loaded 29 files, the second picked up only the 31 new ones, 1,500 events with no duplicates.</dd></div>
+          <div><dt>Data quality</dt><dd>Silver removes 234 double-fired order lines with <code>ROW_NUMBER()</code>, drops 259 rows with non-positive quantity, normalizes status casing and casts types. 13,717 raw rows become 13,228 trusted rows.</dd></div>
+          <div><dt>Schema handling</dt><dd>Schema inference and merge on ingest, explicit casts in Silver, and Bronze kept untouched so the original records are always available.</dd></div>
+          <div><dt>Storage</dt><dd>Delta tables across Bronze, Silver and Gold, with Delta DML and time travel preserving an audit trail. 12 tables governed in Unity Catalog.</dd></div>
+          <div><dt>Orchestration</dt><dd>A Lakeflow Job chains bronze, silver and gold notebooks with task dependencies. A Lakeflow declarative pipeline turns the event stream into a daily revenue materialized view.</dd></div>
+          <div><dt>Analytics</dt><dd>Three Gold tables (daily revenue, category performance, customer lifetime value) feed a Databricks SQL dashboard, with a SQL file that recomputes every KPI to check it.</dd></div>
+        </dl>
+
+        <h3 class="sys-h">Technology</h3>
+        <ul class="tags"><li>Databricks</li><li>Databricks SQL</li><li>PySpark Structured Streaming</li><li>Delta Lake</li><li>Auto Loader</li><li>Lakeflow Jobs</li><li>Lakeflow Declarative Pipelines</li><li>Unity Catalog</li><li>AI/BI dashboards</li></ul>
+
+        <div class="sys-foot">
+          <a class="btn btn-primary" href="https://github.com/SuhailAhmedd/shopstream-lakehouse" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-github"/></svg> Open repository<span class="sr-only"> (opens in a new tab)</span></a>
+          <button type="button" class="btn btn-ghost" data-close>Close</button>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="script.js?v=20260926e" defer></script>
   </body>
 </html>
