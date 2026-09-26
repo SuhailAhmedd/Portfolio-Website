@@ -1,6 +1,115 @@
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 // ——————————————————————————————————————————————————
+// Scramble: text decodes from random glyphs into its final value
+//
+//   <span data-scramble>Suhail Ahmed</span>          decodes once when it enters the viewport
+//   data-scramble-delay="250"                         start later (ms)
+//   data-scramble-card                                also re-decodes briefly when its .card-hover is hovered
+//   <a data-scramble-hover>About</a>                  decodes briefly on hover / focus only
+//
+// The real text stays in the DOM for screen readers and layout: the visible
+// glyphs are an aria-hidden overlay on top of an invisible copy, so the box
+// never changes size while it animates.
+// ——————————————————————————————————————————————————
+
+const Scramble = (() => {
+  const GLYPHS = '01X#@%/\\<>_+*?'
+  const running = new WeakMap()
+
+  const prepare = (el) => {
+    if (el.dataset.scrambleReady) return
+    const text = el.textContent
+    el.dataset.scrambleText = text
+    el.classList.add('scr')
+    el.innerHTML = ''
+    const final = document.createElement('span')
+    final.className = 'scr-final'
+    final.textContent = text
+    const layer = document.createElement('span')
+    layer.className = 'scr-layer'
+    layer.setAttribute('aria-hidden', 'true')
+    el.append(final, layer)
+    el.dataset.scrambleReady = '1'
+  }
+
+  const run = (el, duration = 650) => {
+    if (reduceMotion) return
+    prepare(el)
+    if (running.get(el)) return
+    const text = el.dataset.scrambleText
+    const layer = el.querySelector('.scr-layer')
+    // each character settles at its own moment, roughly left to right
+    const settle = [...text].map((_, i) => (i / text.length) * duration * 0.7 + Math.random() * duration * 0.3)
+    const start = performance.now()
+    let lastSwap = 0
+    running.set(el, true)
+    el.classList.add('scr-on')
+
+    const frame = (now) => {
+      const t = now - start
+      if (t >= duration) {
+        el.classList.remove('scr-on')
+        layer.textContent = ''
+        running.set(el, false)
+        return
+      }
+      // swap glyphs every ~45ms so it reads as decoding, not flicker
+      if (now - lastSwap > 45) {
+        lastSwap = now
+        let out = ''
+        for (let i = 0; i < text.length; i++) {
+          const ch = text[i]
+          out += ch === ' ' || t >= settle[i] ? ch : GLYPHS[(Math.random() * GLYPHS.length) | 0]
+        }
+        layer.textContent = out
+      }
+      requestAnimationFrame(frame)
+    }
+    requestAnimationFrame(frame)
+  }
+
+  const init = () => {
+    const onView = document.querySelectorAll('[data-scramble]')
+    onView.forEach(prepare)
+
+    if (!reduceMotion && 'IntersectionObserver' in window) {
+      // until it decodes, show a static scrambled line of the same length
+      onView.forEach((el) => {
+        const text = el.dataset.scrambleText
+        el.querySelector('.scr-layer').textContent = [...text].map((ch) => (ch === ' ' ? ' ' : GLYPHS[(Math.random() * GLYPHS.length) | 0])).join('')
+        el.classList.add('scr-on')
+      })
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return
+          const el = entry.target
+          io.unobserve(el)
+          setTimeout(() => run(el, 700), Number(el.dataset.scrambleDelay || 0))
+        })
+      }, { threshold: 0.6 })
+      onView.forEach((el) => io.observe(el))
+    }
+
+    // short decode on hover / keyboard focus
+    document.querySelectorAll('[data-scramble-hover]').forEach((el) => {
+      prepare(el)
+      el.addEventListener('mouseenter', () => run(el, 320))
+      el.addEventListener('focus', () => run(el, 320))
+    })
+
+    document.querySelectorAll('[data-scramble-card]').forEach((el) => {
+      const card = el.closest('.card-hover')
+      if (card) card.addEventListener('mouseenter', () => run(el, 420))
+    })
+  }
+
+  return { init, run }
+})()
+
+Scramble.init()
+
+// ——————————————————————————————————————————————————
 // Navigation: mobile toggle, shadow on scroll, active section
 // ——————————————————————————————————————————————————
 
@@ -21,19 +130,19 @@ document.querySelectorAll('a[href^="#"]').forEach((a) => {
   a.addEventListener('click', () => setMenu(false))
 })
 
-const navLinks = [...navList.querySelectorAll('a')]
+const navLinks = [...navList.querySelectorAll('a[href^="#"]')]
 const sections = navLinks.map((a) => document.querySelector(a.getAttribute('href')))
 
 const onScroll = () => {
   topbar.classList.toggle('scrolled', window.scrollY > 8)
 
   const y = window.scrollY + window.innerHeight * 0.35
-  let current = sections[0]
+  let current = null
   sections.forEach((s) => { if (s && s.offsetTop <= y) current = s })
   // the last section is short, so treat the bottom of the page as reaching it
   if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) current = sections[sections.length - 1]
   navLinks.forEach((a) => {
-    const on = a.getAttribute('href') === `#${current.id}`
+    const on = current !== null && a.getAttribute('href') === `#${current.id}`
     a.classList.toggle('active', on)
     if (on) a.setAttribute('aria-current', 'true')
     else a.removeAttribute('aria-current')
@@ -66,37 +175,26 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
 }
 
 // ——————————————————————————————————————————————————
-// Hero terminal: type the command, then print the output
+// Hero status panel: rows print one after another
 // ——————————————————————————————————————————————————
 
-const term = document.getElementById('hero-term')
+const heroStatus = document.getElementById('hero-status')
 
-if (term && !reduceMotion) {
-  const lines = [...term.querySelectorAll('.ln')]
-  const typed = term.querySelector('.typed')
-  const text = typed.dataset.text
-  typed.textContent = ''
-  term.classList.add('play')
-  lines[0].classList.add('on')
-
-  let i = 0
-  const type = () => {
-    typed.textContent = text.slice(0, ++i)
-    if (i < text.length) setTimeout(type, 45 + Math.random() * 45)
-    else lines.slice(1).forEach((l, n) => setTimeout(() => l.classList.add('on'), 350 + n * 260))
-  }
-  setTimeout(type, 600)
+if (heroStatus && !reduceMotion) {
+  const rows = [...heroStatus.querySelectorAll('.st-row')]
+  heroStatus.classList.add('play')
+  rows.forEach((r, i) => setTimeout(() => r.classList.add('on'), 700 + i * 380))
 }
 
 // ——————————————————————————————————————————————————
-// Digital rain: sparse, faint, hero only
+// Digital rain: very faint background texture, hero only
 // ——————————————————————————————————————————————————
 
 const canvas = document.querySelector('.rain')
 
 if (canvas && !reduceMotion) {
   const ctx = canvas.getContext('2d')
-  const glyphs = '0123456789ABCDEF{}[]<>=+*:;'
+  const glyphs = '0123456789ABCDEF<>/_+*'
   let size = 16
   let columns = []
   let width = 0
@@ -115,10 +213,10 @@ if (canvas && !reduceMotion) {
     ctx.setTransform(ratio, 0, 0, ratio, 0, 0)
     ctx.clearRect(0, 0, width, height)
     // only some columns carry a stream; fewer still on small screens
-    const density = mobile ? 0.18 : 0.32
+    const density = mobile ? 0.12 : 0.22
     columns = Array.from({ length: Math.ceil(width / size) }, () => ({
       y: Math.random() * -height,
-      speed: 0.35 + Math.random() * 0.7,
+      speed: 0.3 + Math.random() * 0.5,
       active: Math.random() < density,
       density
     }))
@@ -126,7 +224,7 @@ if (canvas && !reduceMotion) {
 
   const draw = (t) => {
     requestAnimationFrame(draw)
-    if (!visible || t - last < 60) return
+    if (!visible || t - last < 80) return
     last = t
     // fade the previous frame towards transparent to leave short trails
     ctx.globalCompositeOperation = 'destination-out'
@@ -137,7 +235,7 @@ if (canvas && !reduceMotion) {
     columns.forEach((c, i) => {
       if (!c.active) return
       const ch = glyphs[Math.floor(Math.random() * glyphs.length)]
-      ctx.fillStyle = Math.random() < 0.05 ? 'rgba(200, 255, 220, 0.85)' : 'rgba(0, 255, 102, 0.5)'
+      ctx.fillStyle = Math.random() < 0.04 ? 'rgba(200, 255, 220, 0.8)' : 'rgba(0, 255, 102, 0.45)'
       ctx.fillText(ch, i * size, c.y)
       c.y += size * c.speed
       if (c.y > height + size) {
@@ -170,7 +268,8 @@ if (canvas && !reduceMotion) {
 const lightbox = document.getElementById('lightbox')
 
 if (lightbox && typeof lightbox.showModal === 'function') {
-  const lbImg = lightbox.querySelector('img')
+  const lbImg = document.createElement('img')
+  lightbox.append(lbImg)
 
   document.querySelectorAll('.shot-open').forEach((btn) => {
     btn.addEventListener('click', () => {
