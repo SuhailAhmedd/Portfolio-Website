@@ -4,8 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Suhail Ahmed | Data Engineer</title>
-    <meta name="description" content="Suhail Ahmed, Data Engineer. Building reliable data pipelines, scalable ETL systems and analytics platforms with Databricks, Spark, AWS and Kafka." />
-    <meta name="theme-color" content="#05090a" />
+    <meta name="description" content="Suhail Ahmed, Data Engineer. Building reliable data pipelines, lakehouses and analytics systems with Databricks, PySpark, SQL and Delta Lake." />
+    <meta name="theme-color" content="#030605" />
+    <meta property="og:title" content="Suhail Ahmed | Data Engineer" />
+    <meta property="og:description" content="Building reliable data pipelines, lakehouses and analytics systems." />
+    <meta property="og:type" content="website" />
 
     <!-- font awesome cdn link  -->
     <link
@@ -15,7 +18,7 @@
     <!--Google fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- custom css file link  -->
     <link rel="stylesheet" href="styles.css">
@@ -26,112 +29,110 @@
     <script>document.documentElement.classList.add("js")</script>
   </head>
   <body>
-    <a class="skip-link" href="#main">skip to content</a>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <!-- header section -->
+    <!-- navigation -->
 
-    <header>
-      <div class="user">
-        <div class="avatar">
-          <img src="suhail.png" alt="Suhail Ahmed" width="96" height="96">
-        </div>
-        <h3 class="name">Suhail Ahmed</h3>
-        <p class="post">Data Engineer</p>
-        <p class="status"><span class="dot" aria-hidden="true"></span> open to opportunities</p>
-      </div>
+    <header class="topbar">
+      <nav class="nav" aria-label="Main">
+        <a class="brand" href="#home" aria-label="Suhail Ahmed, back to top">
+          <span class="brand-user">suhail</span><span class="brand-sep">@</span><span class="brand-host">data-engineer</span><span class="brand-path">:~$</span><span class="cursor" aria-hidden="true"></span>
+        </a>
 
-      <nav class="navbar" aria-label="Sections">
-        <p class="nav-label">// explorer</p>
-        <ul>
-          <li><a href="#home"><span class="tilde">~/</span>home</a></li>
-          <li><a href="#about"><span class="tilde">~/</span>about</a></li>
-          <li><a href="#skills"><span class="tilde">~/</span>skills</a></li>
-          <li><a href="#projects"><span class="tilde">~/</span>projects</a></li>
-          <li><a href="#experience"><span class="tilde">~/</span>experience</a></li>
-          <li><a href="#contact"><span class="tilde">~/</span>contact</a></li>
+        <button class="nav-toggle" id="nav-toggle" aria-controls="nav-links" aria-expanded="false">
+          <span class="sr-only">Menu</span>
+          <span class="bars" aria-hidden="true"><span></span><span></span></span>
+        </button>
+
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#home"><span class="tilde" aria-hidden="true">~/</span>home</a></li>
+          <li><a href="#about"><span class="tilde" aria-hidden="true">~/</span>about</a></li>
+          <li><a href="#experience"><span class="tilde" aria-hidden="true">~/</span>experience</a></li>
+          <li><a href="#projects"><span class="tilde" aria-hidden="true">~/</span>projects</a></li>
+          <li><a href="#skills"><span class="tilde" aria-hidden="true">~/</span>skills</a></li>
+          <li><a href="#contact"><span class="tilde" aria-hidden="true">~/</span>contact</a></li>
         </ul>
       </nav>
-
-      <div class="socials">
-        <a href="https://github.com/SuhailAhmedd" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/suhail--ahmed/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-        <a href="mailto:suhailahmed030803@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-      </div>
     </header>
-
-    <!-- header section ends -->
-
-    <button id="menu" class="fas fa-bars" aria-label="Open navigation" aria-expanded="false"></button>
 
     <main id="main">
 
     <!-- home section starts  -->
 
-    <section class="home" id="home">
-      <canvas class="data-rain" aria-hidden="true"></canvas>
-      <div class="grid-bg" aria-hidden="true"></div>
+    <section class="hero" id="home" aria-labelledby="hero-name">
+      <canvas class="rain" aria-hidden="true"></canvas>
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="scan" aria-hidden="true"></div>
 
-      <div class="hero">
+      <div class="hero-inner">
         <div class="hero-copy">
-          <p class="prompt"><span class="p-user">suhail@data-platform</span>:<span class="p-path">~</span>$ whoami</p>
-          <h1 class="hero-name">Suhail Ahmed</h1>
-          <p class="hero-role"><span class="bracket">&lt;</span>Data Engineer<span class="bracket">/&gt;</span><span class="caret" aria-hidden="true"></span></p>
-          <p class="hero-pitch">Building reliable data pipelines, scalable ETL systems, and analytics platforms.</p>
-
-          <ul class="platforms" aria-label="Platforms I work with">
-            <li><i class="fas fa-layer-group"></i> Databricks</li>
-            <li><i class="fas fa-bolt"></i> Apache Spark</li>
-            <li><i class="fab fa-aws"></i> AWS</li>
-            <li><i class="fas fa-stream"></i> Kafka</li>
-          </ul>
+          <p class="cmd" aria-hidden="true"><span class="ps">$</span> whoami</p>
+          <h1 class="hero-name" id="hero-name"><span class="gt" aria-hidden="true">&gt;</span> Suhail Ahmed</h1>
+          <p class="hero-role">Data Engineer</p>
+          <p class="hero-pitch">Building reliable data pipelines, lakehouses, and analytics systems.</p>
 
           <div class="cta">
-            <a class="btn" href="#projects">view pipelines <i class="fas fa-arrow-right"></i></a>
-            <a class="btn btn-ghost" href="https://drive.google.com/file/d/1ThbYjsXAlbOLefxLMoA3nbwoMET0xoo9/view?usp=sharing" target="_blank" rel="noopener">résumé <i class="fas fa-download"></i></a>
+            <a class="btn btn-primary" href="#projects" aria-label="View projects">
+              <span class="br" aria-hidden="true">[</span> ./view_projects <span class="br" aria-hidden="true">]</span>
+            </a>
+            <a class="btn" href="https://github.com/SuhailAhmedd" target="_blank" rel="noopener" aria-label="GitHub profile (opens in a new tab)">
+              <span class="br" aria-hidden="true">[</span> git://github <span class="br" aria-hidden="true">]</span>
+            </a>
+            <a class="btn" href="https://drive.google.com/file/d/1ThbYjsXAlbOLefxLMoA3nbwoMET0xoo9/view?usp=sharing" target="_blank" rel="noopener" aria-label="Résumé (opens in a new tab)">
+              <span class="br" aria-hidden="true">[</span> ./download_resume <span class="br" aria-hidden="true">]</span>
+            </a>
           </div>
         </div>
 
-        <div class="terminal hero-terminal" aria-label="Example pipeline run">
-          <div class="term-bar">
-            <span></span><span></span><span></span>
-            <p>pipeline_run.log</p>
+        <div class="panel term hero-term" role="img" aria-label="Terminal showing a pipeline build using Databricks, PySpark, SQL and Delta Lake">
+          <div class="panel-bar" aria-hidden="true">
+            <span class="dots"><i></i><i></i><i></i></span>
+            <span class="panel-title">zsh — build</span>
           </div>
-          <pre class="term-body" id="run-log"><span class="t-dim">$</span> run daily_sales_etl --env prod
-<span class="t-dim">[extract  ]</span> read raw zone on s3 ........... <span class="t-ok">ok</span>
-<span class="t-dim">[transform]</span> pyspark job on databricks ..... <span class="t-ok">ok</span>
-<span class="t-dim">[validate ]</span> null / dup / schema checks .... <span class="t-ok">pass</span>
-<span class="t-dim">[load     ]</span> merge into delta gold layer ... <span class="t-ok">ok</span>
-<span class="t-dim">[publish  ]</span> refresh analytics views ....... <span class="t-ok">ok</span>
-<span class="t-hl">status: SUCCEEDED</span></pre>
+<pre class="term-body" id="hero-term" aria-hidden="true"><span class="ln"><span class="ps">suhail@data-engineer:~$</span> <span class="typed" data-text="build --pipeline">build --pipeline</span></span>
+<span class="ln out">&gt; Databricks</span>
+<span class="ln out">&gt; PySpark</span>
+<span class="ln out">&gt; SQL</span>
+<span class="ln out">&gt; Delta Lake</span>
+<span class="ln ok">✓ pipeline ready</span>
+<span class="ln"><span class="ps">suhail@data-engineer:~$</span> <span class="cursor"></span></span></pre>
         </div>
       </div>
 
-      <a href="#about" class="scroll-hint" aria-label="Scroll to about"><span>scroll</span><i class="fas fa-chevron-down"></i></a>
+      <a href="#about" class="scroll-hint" aria-label="Scroll to About"><span aria-hidden="true">scroll</span><i class="fas fa-chevron-down" aria-hidden="true"></i></a>
     </section>
 
     <!-- home section ends -->
 
     <!-- about section starts  -->
 
-    <section class="about" id="about">
-      <h2 class="heading"><span class="idx">01.</span> about</h2>
+    <section class="section" id="about" aria-labelledby="about-h">
+      <header class="section-head">
+        <p class="cmd" aria-hidden="true"><span class="ps">$</span> cat about.txt</p>
+        <h2 id="about-h">About</h2>
+      </header>
 
       <div class="about-grid">
         <div class="about-text reveal">
-          <p class="lead">Computer Science engineer turned <strong>Data Engineer</strong>, building production-grade data pipelines and analytics systems.</p>
-          <p>I design and run batch and streaming pipelines with PySpark, SQL and Databricks on AWS, and I care about the unglamorous parts that make data trustworthy: clean modelling, data quality checks and pipelines that fail loudly instead of silently.</p>
-          <a class="btn btn-ghost" href="https://drive.google.com/file/d/1ThbYjsXAlbOLefxLMoA3nbwoMET0xoo9/view?usp=sharing" target="_blank" rel="noopener">download résumé <i class="fas fa-download"></i></a>
+          <p class="lead">Data Engineer building production-grade data pipelines and analytics systems.</p>
+          <p>I design and run batch and streaming pipelines with PySpark, SQL and Databricks, and I care about the unglamorous parts that make data trustworthy: clean modelling, data quality checks, and pipelines that fail loudly instead of silently.</p>
+          <p>Lately that means lakehouse work: medallion architectures on Delta Lake, incremental ingestion with Auto Loader, and governance with Unity Catalog.</p>
         </div>
 
-        <div class="terminal reveal" aria-label="Profile">
-          <div class="term-bar"><span></span><span></span><span></span><p>profile.yaml</p></div>
-          <dl class="kv">
-            <div><dt>name</dt><dd>Suhail Ahmed</dd></div>
-            <div><dt>role</dt><dd>Data Engineer</dd></div>
-            <div><dt>focus</dt><dd>ETL / ELT, data pipelines, data quality</dd></div>
-            <div><dt>stack</dt><dd>PySpark, SQL, Databricks, AWS</dd></div>
-            <div><dt>location</dt><dd>Chennai, India</dd></div>
-          </dl>
+        <div class="panel reveal">
+          <div class="panel-bar" aria-hidden="true">
+            <span class="dots"><i></i><i></i><i></i></span>
+            <span class="panel-title">profile.yaml</span>
+          </div>
+          <div class="profile">
+            <img class="avatar" src="suhail.png" alt="Portrait of Suhail Ahmed" width="88" height="88" loading="lazy">
+            <dl class="kv">
+              <div><dt>name</dt><dd>Suhail Ahmed</dd></div>
+              <div><dt>role</dt><dd>Data Engineer</dd></div>
+              <div><dt>focus</dt><dd>Pipelines, lakehouses, data quality</dd></div>
+              <div><dt>location</dt><dd>Chennai, India</dd></div>
+            </dl>
+          </div>
           <p class="kv-title"># education</p>
           <ol class="edu">
             <li><span>2025</span> BTech, Computer Science &amp; Engineering, SRM Institute of Science and Technology, Chennai</li>
@@ -144,103 +145,193 @@
 
     <!-- about section ends -->
 
-    <!-- skills section starts  -->
+    <!-- experience section starts  -->
 
-    <section class="skills" id="skills">
-      <h2 class="heading"><span class="idx">02.</span> skills</h2>
-      <p class="section-sub">The stack, grouped the way a data platform is built.</p>
+    <section class="section" id="experience" aria-labelledby="exp-h">
+      <header class="section-head">
+        <p class="cmd" aria-hidden="true"><span class="ps">$</span> tail -f experience.log</p>
+        <h2 id="exp-h">Experience</h2>
+      </header>
 
-      <div class="skill-grid">
-        <article class="skill-card reveal">
-          <header><i class="fas fa-project-diagram"></i><h3>Data Engineering</h3><span class="layer">layer_01</span></header>
-          <ul class="chips">
-            <li>Python</li><li>SQL</li><li>PySpark</li><li>Apache Spark</li><li>ETL / ELT</li><li>Data Pipelines</li>
-          </ul>
-        </article>
-
-        <article class="skill-card reveal">
-          <header><i class="fas fa-cloud"></i><h3>Cloud &amp; Platforms</h3><span class="layer">layer_02</span></header>
-          <ul class="chips">
-            <li>Databricks</li><li>AWS</li><li>S3</li><li>Glue</li><li>Athena</li><li>Lambda</li>
-          </ul>
-        </article>
-
-        <article class="skill-card reveal">
-          <header><i class="fas fa-database"></i><h3>Data Infrastructure</h3><span class="layer">layer_03</span></header>
-          <ul class="chips">
-            <li>Delta Lake</li><li>Unity Catalog</li><li>Kafka</li><li>Apache Airflow</li><li>Data Warehousing</li><li>Data Quality</li>
-          </ul>
-        </article>
-
-        <article class="skill-card reveal">
-          <header><i class="fas fa-terminal"></i><h3>Engineering</h3><span class="layer">layer_04</span></header>
-          <ul class="chips">
-            <li>Git</li><li>Docker</li><li>REST APIs</li><li>Linux</li>
-          </ul>
-        </article>
-      </div>
+      <ol class="log">
+        <li class="log-entry reveal">
+          <div class="log-when">
+            <time datetime="2024-08">Aug 2024</time>
+            <span class="log-now">present</span>
+          </div>
+          <div class="log-body">
+            <h3><span class="company">TMRW</span> <span class="log-dash" aria-hidden="true">──</span> <span class="title">Data Engineer</span></h3>
+            <ul class="tree">
+              <li>Build and maintain data pipelines and ETL workflows on Databricks using PySpark and SQL.</li>
+              <li>Process and transform large datasets stored on AWS S3 into clean, analytics-ready tables.</li>
+              <li>Implement data quality checks for nulls, duplicates and schema changes so downstream analytics can be trusted.</li>
+              <li>Deliver curated analytics datasets and SQL models for reporting and business analysis.</li>
+            </ul>
+            <ul class="tags" aria-label="Tech used">
+              <li>Databricks</li><li>PySpark</li><li>SQL</li><li>AWS S3</li><li>Data Pipelines</li><li>Data Quality</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
     </section>
 
-    <!-- skills section ends -->
+    <!-- experience section ends -->
 
     <!-- projects section starts  -->
 
-    <section class="projects" id="projects">
-      <h2 class="heading"><span class="idx">03.</span> projects</h2>
-      <p class="section-sub">End-to-end pipelines, from source to query.</p>
+    <section class="section" id="projects" aria-labelledby="proj-h">
+      <header class="section-head">
+        <p class="cmd" aria-hidden="true"><span class="ps">$</span> ls projects/</p>
+        <h2 id="proj-h">Projects</h2>
+      </header>
 
-      <div class="pipeline-list">
-        <article class="pipeline reveal">
-          <div class="pipe-head">
-            <p class="pipe-id"><i class="fab fa-spotify"></i> pipeline://spotify-etl</p>
-            <span class="badge">batch</span>
+      <!-- featured: ShopStream -->
+      <article class="featured panel reveal" aria-labelledby="ss-h">
+        <div class="panel-bar" aria-hidden="true">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span class="panel-title">./shopstream --run</span>
+          <span class="live"><span class="pulse"></span>featured</span>
+        </div>
+
+        <div class="featured-body">
+          <div class="featured-head">
+            <p class="kicker">End-to-end data lakehouse</p>
+            <h3 id="ss-h">ShopStream</h3>
+            <p class="featured-desc">A Databricks lakehouse that ingests historical CSV orders in batch and a live JSON event stream, runs both through a Bronze, Silver and Gold medallion architecture on Delta Lake, and serves the result on an AI/BI sales dashboard. Everything is governed in Unity Catalog and orchestrated with Lakeflow.</p>
+            <ul class="tags" aria-label="Tech stack">
+              <li>Databricks</li><li>PySpark</li><li>SQL</li><li>Delta Lake</li><li>Auto Loader</li><li>Lakeflow</li><li>Unity Catalog</li>
+            </ul>
           </div>
-          <h3>Spotify ETL Pipeline on AWS</h3>
-          <p>Serverless ETL that pulls Spotify Top 50 playlist data on a schedule, transforms it with Lambda and makes it queryable in Athena.</p>
-          <ol class="flow" aria-label="Pipeline flow">
-            <li>Spotify API</li><li>Lambda</li><li>S3</li><li>Glue</li><li>Athena</li>
+
+          <ol class="medallion" aria-label="ShopStream data flow">
+            <li class="stage stage-source">
+              <span class="stage-name">Source</span>
+              <span class="stage-sub">CSV batch + JSON events</span>
+              <span class="stage-meta">COPY INTO · Auto Loader</span>
+            </li>
+            <li class="stage stage-bronze">
+              <span class="stage-name">Bronze</span>
+              <span class="stage-sub">Raw Delta tables</span>
+              <span class="stage-meta">13,717 order lines</span>
+            </li>
+            <li class="stage stage-silver">
+              <span class="stage-name">Silver</span>
+              <span class="stage-sub">Cleaned, typed, deduplicated</span>
+              <span class="stage-meta">13,228 trusted rows</span>
+            </li>
+            <li class="stage stage-gold">
+              <span class="stage-name">Gold</span>
+              <span class="stage-sub">Revenue, category, customer LTV</span>
+              <span class="stage-meta">3 aggregate tables</span>
+            </li>
+            <li class="stage stage-analytics">
+              <span class="stage-name">Analytics</span>
+              <span class="stage-sub">AI/BI sales dashboard</span>
+              <span class="stage-meta">Databricks SQL</span>
+            </li>
           </ol>
-          <div class="pipe-foot">
+
+          <dl class="metrics">
+            <div><dt>Raw order lines ingested</dt><dd>13,717</dd></div>
+            <div><dt>Bad rows removed in Silver</dt><dd>493</dd></div>
+            <div><dt>Streamed events, no duplicates</dt><dd>1,500</dd></div>
+            <div><dt>Tables governed in Unity Catalog</dt><dd>12</dd></div>
+          </dl>
+
+          <div class="shots">
+            <figure class="shot shot-wide">
+              <button class="shot-open" type="button" data-full="images/shopstream/architecture.webp" aria-label="Enlarge architecture diagram">
+                <img src="images/shopstream/architecture.webp" alt="ShopStream architecture: batch CSV files through COPY INTO and JSON events through Auto Loader land in bronze, are cleaned into silver, aggregated into gold revenue and customer tables, and served to a dashboard, orchestrated by a Databricks job" width="1600" height="800" loading="lazy" decoding="async">
+              </button>
+              <figcaption><span class="fc-key">architecture</span> One lakehouse, two ways in: batch and streaming share the same medallion layers.</figcaption>
+            </figure>
+            <figure class="shot">
+              <button class="shot-open" type="button" data-full="images/shopstream/dashboard.webp" aria-label="Enlarge sales dashboard screenshot">
+                <img src="images/shopstream/dashboard.webp" alt="ShopStream Sales dashboard in Databricks showing revenue by category and daily revenue for the first half of 2026" width="1512" height="732" loading="lazy" decoding="async">
+              </button>
+              <figcaption><span class="fc-key">dashboard</span> AI/BI sales dashboard built only on the Gold tables.</figcaption>
+            </figure>
+            <figure class="shot">
+              <button class="shot-open" type="button" data-full="images/shopstream/data-quality.webp" aria-label="Enlarge data quality diagram">
+                <img src="images/shopstream/data-quality.webp" alt="Silver data quality: from 13,717 bronze rows, 234 duplicated line ids and 259 rows with invalid quantity are dropped and statuses are normalized, leaving 13,228 silver rows" width="940" height="410" loading="lazy" decoding="async">
+              </button>
+              <figcaption><span class="fc-key">data quality</span> Deduplication and cleanup in Silver; Bronze is never edited.</figcaption>
+            </figure>
+            <figure class="shot">
+              <button class="shot-open" type="button" data-full="images/shopstream/streaming.webp" aria-label="Enlarge streaming diagram">
+                <img src="images/shopstream/streaming.webp" alt="Auto Loader checkpoint: the first run loads 29 files, the second run loads only the 31 new files, giving 1,500 events in bronze with no duplicates" width="940" height="435" loading="lazy" decoding="async">
+              </button>
+              <figcaption><span class="fc-key">streaming</span> Auto Loader checkpoints make every file land exactly once.</figcaption>
+            </figure>
+          </div>
+
+          <div class="featured-foot">
+            <a class="btn btn-primary" href="https://github.com/SuhailAhmedd/shopstream-lakehouse#readme" target="_blank" rel="noopener" aria-label="View the ShopStream project write-up (opens in a new tab)">
+              <span class="br" aria-hidden="true">[</span> ./view_project <span class="br" aria-hidden="true">]</span>
+            </a>
+            <a class="btn" href="https://github.com/SuhailAhmedd/shopstream-lakehouse" target="_blank" rel="noopener" aria-label="ShopStream source code on GitHub (opens in a new tab)">
+              <span class="br" aria-hidden="true">[</span> git://github <span class="br" aria-hidden="true">]</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- other projects -->
+      <div class="project-grid">
+        <article class="project panel reveal">
+          <div class="panel-bar" aria-hidden="true">
+            <span class="dots"><i></i><i></i><i></i></span>
+            <span class="panel-title">pipeline://spotify-etl</span>
+            <span class="mode">batch</span>
+          </div>
+          <div class="project-body">
+            <h3>Spotify ETL Pipeline on AWS</h3>
+            <p>Serverless ETL that pulls Spotify Top 50 playlist data on a schedule, transforms it with Lambda and makes it queryable in Athena.</p>
+            <p class="flow" aria-label="Pipeline flow: Spotify API, Lambda, S3, Glue, Athena">Spotify API <span aria-hidden="true">→</span> Lambda <span aria-hidden="true">→</span> S3 <span aria-hidden="true">→</span> Glue <span aria-hidden="true">→</span> Athena</p>
             <ul class="tags" aria-label="Tech stack">
               <li>Python</li><li>AWS Lambda</li><li>S3</li><li>Glue</li><li>Athena</li><li>EventBridge</li>
             </ul>
-            <a class="btn btn-ghost btn-sm" href="https://github.com/SuhailAhmedd/Spotify-Data-Pipeline-using-AWS" target="_blank" rel="noopener"><i class="fab fa-github"></i> github</a>
+            <a class="btn btn-sm" href="https://github.com/SuhailAhmedd/Spotify-Data-Pipeline-using-AWS" target="_blank" rel="noopener" aria-label="Spotify ETL on GitHub (opens in a new tab)">
+              <span class="br" aria-hidden="true">[</span> git://github <span class="br" aria-hidden="true">]</span>
+            </a>
           </div>
         </article>
 
-        <article class="pipeline reveal">
-          <div class="pipe-head">
-            <p class="pipe-id"><i class="fas fa-chart-line"></i> pipeline://stock-stream</p>
-            <span class="badge badge-live">streaming</span>
+        <article class="project panel reveal">
+          <div class="panel-bar" aria-hidden="true">
+            <span class="dots"><i></i><i></i><i></i></span>
+            <span class="panel-title">pipeline://stock-stream</span>
+            <span class="mode mode-live">streaming</span>
           </div>
-          <h3>Real-Time Stock Market Pipeline</h3>
-          <p>Streams stock market data through Kafka on EC2 into S3, catalogued with Glue and queried with Athena.</p>
-          <ol class="flow" aria-label="Pipeline flow">
-            <li>Producer</li><li>Kafka on EC2</li><li>Consumer</li><li>S3</li><li>Glue</li><li>Athena</li>
-          </ol>
-          <div class="pipe-foot">
+          <div class="project-body">
+            <h3>Real-Time Stock Market Pipeline</h3>
+            <p>Streams stock market data through Kafka on EC2 into S3, catalogued with Glue and queried with Athena.</p>
+            <p class="flow" aria-label="Pipeline flow: Producer, Kafka on EC2, Consumer, S3, Glue, Athena">Producer <span aria-hidden="true">→</span> Kafka <span aria-hidden="true">→</span> Consumer <span aria-hidden="true">→</span> S3 <span aria-hidden="true">→</span> Glue <span aria-hidden="true">→</span> Athena</p>
             <ul class="tags" aria-label="Tech stack">
               <li>Python</li><li>Apache Kafka</li><li>AWS EC2</li><li>S3</li><li>Glue</li><li>Athena</li>
             </ul>
-            <a class="btn btn-ghost btn-sm" href="https://github.com/SuhailAhmedd/Real-Time-Stock-Market-Data-Pipeline-using-Kafka" target="_blank" rel="noopener"><i class="fab fa-github"></i> github</a>
+            <a class="btn btn-sm" href="https://github.com/SuhailAhmedd/Real-Time-Stock-Market-Data-Pipeline-using-Kafka" target="_blank" rel="noopener" aria-label="Stock market pipeline on GitHub (opens in a new tab)">
+              <span class="br" aria-hidden="true">[</span> git://github <span class="br" aria-hidden="true">]</span>
+            </a>
           </div>
         </article>
 
-        <article class="pipeline reveal">
-          <div class="pipe-head">
-            <p class="pipe-id"><i class="fas fa-bolt"></i> pipeline://ipl-analytics</p>
-            <span class="badge">batch</span>
+        <article class="project panel reveal">
+          <div class="panel-bar" aria-hidden="true">
+            <span class="dots"><i></i><i></i><i></i></span>
+            <span class="panel-title">pipeline://ipl-analytics</span>
+            <span class="mode">batch</span>
           </div>
-          <h3>IPL Data Analysis with Apache Spark</h3>
-          <p>PySpark ETL and SQL analytics on IPL match and player data in Databricks, with S3 storage and visual insights.</p>
-          <ol class="flow" aria-label="Pipeline flow">
-            <li>Raw CSV</li><li>S3</li><li>PySpark</li><li>Spark SQL</li><li>Insights</li>
-          </ol>
-          <div class="pipe-foot">
+          <div class="project-body">
+            <h3>IPL Data Analysis with Apache Spark</h3>
+            <p>PySpark ETL and SQL analytics on IPL match and player data in Databricks, with S3 storage and visual insights.</p>
+            <p class="flow" aria-label="Pipeline flow: Raw CSV, S3, PySpark, Spark SQL, Insights">Raw CSV <span aria-hidden="true">→</span> S3 <span aria-hidden="true">→</span> PySpark <span aria-hidden="true">→</span> Spark SQL <span aria-hidden="true">→</span> Insights</p>
             <ul class="tags" aria-label="Tech stack">
               <li>PySpark</li><li>Spark SQL</li><li>Databricks</li><li>S3</li><li>Matplotlib</li>
             </ul>
-            <a class="btn btn-ghost btn-sm" href="https://github.com/SuhailAhmedd/IPL-Data-Analysis-using-Apache-Spark" target="_blank" rel="noopener"><i class="fab fa-github"></i> github</a>
+            <a class="btn btn-sm" href="https://github.com/SuhailAhmedd/IPL-Data-Analysis-using-Apache-Spark" target="_blank" rel="noopener" aria-label="IPL analysis on GitHub (opens in a new tab)">
+              <span class="br" aria-hidden="true">[</span> git://github <span class="br" aria-hidden="true">]</span>
+            </a>
           </div>
         </article>
       </div>
@@ -248,77 +339,96 @@
 
     <!-- projects section ends -->
 
-    <!-- experience section starts  -->
+    <!-- skills section starts  -->
 
-    <section class="experience" id="experience">
-      <h2 class="heading"><span class="idx">04.</span> experience</h2>
-      <p class="section-sub">Production data engineering on real business data.</p>
+    <section class="section" id="skills" aria-labelledby="skills-h">
+      <header class="section-head">
+        <p class="cmd" aria-hidden="true"><span class="ps">$</span> SELECT * FROM skills;</p>
+        <h2 id="skills-h">Tech Stack</h2>
+      </header>
 
-      <div class="timeline">
-        <article class="job reveal">
-          <div class="job-marker" aria-hidden="true"></div>
-          <div class="job-card">
-            <div class="job-head">
-              <div>
-                <h3>Data Engineer</h3>
-                <p class="company">TMRW</p>
-              </div>
-              <p class="dates">Aug 2024 – Present</p>
-            </div>
-            <ul class="job-points">
-              <li>Build and maintain data pipelines and ETL workflows on Databricks using PySpark and SQL.</li>
-              <li>Process and transform large datasets stored on AWS S3 into clean, analytics-ready tables.</li>
-              <li>Implement data quality checks for nulls, duplicates and schema changes so downstream analytics can be trusted.</li>
-              <li>Deliver curated analytics datasets and SQL models for reporting and business analysis.</li>
-            </ul>
-            <ul class="tags" aria-label="Tech used">
-              <li>Databricks</li><li>PySpark</li><li>SQL</li><li>AWS</li><li>S3</li><li>ETL</li><li>Data Quality</li>
-            </ul>
-          </div>
+      <div class="skill-grid">
+        <article class="skill reveal">
+          <h3><span class="sk-idx" aria-hidden="true">01</span> Data Engineering</h3>
+          <ul class="chips">
+            <li>Python</li><li>SQL</li><li>PySpark</li><li>Apache Spark</li><li>ETL / ELT</li><li>Data Modelling</li>
+          </ul>
+        </article>
+
+        <article class="skill reveal">
+          <h3><span class="sk-idx" aria-hidden="true">02</span> Lakehouse</h3>
+          <ul class="chips">
+            <li>Databricks</li><li>Delta Lake</li><li>Databricks SQL</li><li>Medallion Architecture</li>
+          </ul>
+        </article>
+
+        <article class="skill reveal">
+          <h3><span class="sk-idx" aria-hidden="true">03</span> Streaming</h3>
+          <ul class="chips">
+            <li>Auto Loader</li><li>Structured Streaming</li><li>Lakeflow Pipelines</li><li>Apache Kafka</li>
+          </ul>
+        </article>
+
+        <article class="skill reveal">
+          <h3><span class="sk-idx" aria-hidden="true">04</span> Cloud &amp; Governance</h3>
+          <ul class="chips">
+            <li>AWS S3</li><li>Glue</li><li>Athena</li><li>Lambda</li><li>EC2</li><li>Unity Catalog</li>
+          </ul>
+        </article>
+
+        <article class="skill reveal">
+          <h3><span class="sk-idx" aria-hidden="true">05</span> Orchestration &amp; Quality</h3>
+          <ul class="chips">
+            <li>Lakeflow Jobs</li><li>Apache Airflow</li><li>Data Quality Checks</li>
+          </ul>
+        </article>
+
+        <article class="skill reveal">
+          <h3><span class="sk-idx" aria-hidden="true">06</span> Tooling</h3>
+          <ul class="chips">
+            <li>Git</li><li>Docker</li><li>Linux</li><li>REST APIs</li>
+          </ul>
         </article>
       </div>
+      <p class="rows-returned" aria-hidden="true">6 rows returned · 0.02s</p>
     </section>
 
-    <!-- experience section ends -->
+    <!-- skills section ends -->
 
     <!-- contact section starts  -->
 
-    <section class="contact" id="contact">
-      <h2 class="heading"><span class="idx">05.</span> contact</h2>
-      <p class="section-sub">Hiring for a data role, or want to talk pipelines? Send a message.</p>
+    <section class="section" id="contact" aria-labelledby="contact-h">
+      <header class="section-head">
+        <p class="cmd" aria-hidden="true"><span class="ps">$</span> connect --with suhail</p>
+        <h2 id="contact-h">Contact</h2>
+      </header>
 
-      <div class="row">
-        <div class="content reveal">
-          <div class="info">
-            <a href="mailto:suhailahmed030803@gmail.com"><i class="fas fa-envelope"></i> suhailahmed030803@gmail.com</a>
-            <a href="tel:+919150555682"><i class="fas fa-phone"></i> +91 9150555682</a>
-            <p><i class="fas fa-map-marker-alt"></i> Chennai, India - 600002</p>
-            <a href="https://www.linkedin.com/in/suhail--ahmed/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> linkedin.com/in/suhail--ahmed</a>
-            <a href="https://twitter.com/SuhailAhmed_03" target="_blank" rel="noopener"><i class="fab fa-twitter"></i> @SuhailAhmed_03</a>
-            <a href="https://github.com/SuhailAhmedd" target="_blank" rel="noopener"><i class="fab fa-github"></i> github.com/SuhailAhmedd</a>
-          </div>
+      <div class="contact-grid">
+        <div class="contact-links reveal">
+          <p class="lead">Hiring for a data role, or want to talk pipelines? Reach out.</p>
+          <ul class="links">
+            <li><a href="https://github.com/SuhailAhmedd" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i><span class="lk-label">GitHub</span><span class="lk-val">github.com/SuhailAhmedd</span></a></li>
+            <li><a href="https://www.linkedin.com/in/suhail--ahmed/" target="_blank" rel="noopener"><i class="fab fa-linkedin-in" aria-hidden="true"></i><span class="lk-label">LinkedIn</span><span class="lk-val">in/suhail--ahmed</span></a></li>
+            <li><a href="mailto:suhailahmed030803@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i><span class="lk-label">Email</span><span class="lk-val">suhailahmed030803@gmail.com</span></a></li>
+          </ul>
         </div>
 
         <!-- Replace YOUR_FORM_ID with the ID from your Formspree form (https://formspree.io).
              Until then, submitting opens the visitor's email app addressed to you instead. -->
-        <form id="contact-form" class="terminal reveal" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-          <div class="term-bar"><span></span><span></span><span></span><p>new_message.sh</p></div>
+        <form id="contact-form" class="panel reveal" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="panel-bar" aria-hidden="true">
+            <span class="dots"><i></i><i></i><i></i></span>
+            <span class="panel-title">new_message.sh</span>
+          </div>
           <div class="form-body">
-            <label for="cf-name">name</label>
-            <input type="text" id="cf-name" name="name" placeholder="Your name" class="box" autocomplete="name" required>
-            <label for="cf-email">email</label>
-            <input type="email" id="cf-email" name="email" placeholder="you@company.com" class="box" autocomplete="email" required>
-            <label for="message">message</label>
-            <textarea
-              name="message"
-              id="message"
-              rows="6"
-              class="box message"
-              placeholder="What would you like to talk about?"
-              required
-            ></textarea>
-            <button type="submit" class="btn">
-              send message <i class="fas fa-paper-plane"></i>
+            <label for="cf-name"><span aria-hidden="true">--</span>name</label>
+            <input type="text" id="cf-name" name="name" placeholder="Your name" autocomplete="name" required>
+            <label for="cf-email"><span aria-hidden="true">--</span>email</label>
+            <input type="email" id="cf-email" name="email" placeholder="you@company.com" autocomplete="email" required>
+            <label for="message"><span aria-hidden="true">--</span>message</label>
+            <textarea name="message" id="message" rows="5" placeholder="What would you like to talk about?" required></textarea>
+            <button type="submit" class="btn btn-primary">
+              <span class="br" aria-hidden="true">[</span> ./send_message <span class="br" aria-hidden="true">]</span>
             </button>
             <p class="form-status" role="status" aria-live="polite"></p>
           </div>
@@ -330,9 +440,15 @@
 
     </main>
 
-    <footer>
-      <p class="copyright"><span class="t-dim">$</span> echo "© Suhail Ahmed, Data Engineer"</p>
+    <footer class="footer">
+      <p><span class="ps">$</span> echo "© Suhail Ahmed, Data Engineer"</p>
+      <a href="#home" class="to-top">cd ~ <i class="fas fa-arrow-up" aria-hidden="true"></i></a>
     </footer>
+
+    <dialog class="lightbox" id="lightbox" aria-label="Enlarged image">
+      <button class="lb-close" type="button" aria-label="Close"><i class="fas fa-times" aria-hidden="true"></i></button>
+      <img alt="">
+    </dialog>
 
     <!-- custom js file link  -->
     <script src="script.js"></script>
