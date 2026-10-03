@@ -508,7 +508,7 @@ const Terminal = (() => {
     contact: () => [
       row('email', '<a href="mailto:suhailahmed030803@gmail.com">suhailahmed030803@gmail.com</a>'),
       row('linkedin', link('https://www.linkedin.com/in/suhail--ahmed/', 'in/suhail--ahmed')),
-      row('resume', link('https://drive.google.com/file/d/1ThbYjsXAlbOLefxLMoA3nbwoMET0xoo9/view?usp=sharing', 'view PDF'))
+      row('resume', link('https://drive.google.com/file/d/1Xj_UhkDw9-tYDkSlQtyz9ZI5vSW-t3Qk/view?usp=sharing', 'view PDF'))
     ].join(''),
     github: () => [
       row('profile', link('https://github.com/SuhailAhmedd', 'github.com/SuhailAhmedd')),
